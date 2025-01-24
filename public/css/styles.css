@@ -97,7 +97,7 @@ nav li {
   color: #425A3E;
   white-space: nowrap;
   position: absolute;
-  top: 11rem;
+  top: 11.5rem;
   margin: 3rem;
   padding: .5em;
   border-radius: 1em;
@@ -141,15 +141,12 @@ nav li {
   grid-area: 1 / 1;
 }
 
-body {
-  justify-items: center;
-}
-
 /* .hero_blerb {
   position: absolute;
 } */
 
 body {
+  justify-items: center;
   background-color: transparent;
   background-image: url("/images/site/small_check.jpg"), none;
   /* background-image:; */
@@ -167,7 +164,18 @@ body {
   border-color: rgb(103, 240, 190);
   border-radius: 5px;
   border-width: 5px;
+  padding: 1rem;
 }
 
+/* .reviews {
+  font-weight: 900;
+  height: fit-content;
+  height: auto;
+} */
+
+.reviews ul {
+  font-weight: 600;
+  
+}
 
 }
