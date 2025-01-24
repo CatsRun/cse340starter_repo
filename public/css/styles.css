@@ -26,12 +26,17 @@ header {
   text-decoration: none;
 }
 
+/************* Footer *************/
+footer {
+  margin: 1rem;
+}
+
 /******* Navigation ***************/
 nav {
   background-color: black;
   color: white;
   padding: .5rem;
-  
+  margin: 1rem;
   text-decoration: none;
 }
 
@@ -92,7 +97,7 @@ nav li {
   color: #425A3E;
   white-space: nowrap;
   position: absolute;
-  top: 10rem;
+  top: 11rem;
   margin: 3rem;
   padding: .5em;
   border-radius: 1em;
@@ -143,4 +148,26 @@ body {
 /* .hero_blerb {
   position: absolute;
 } */
+
+body {
+  background-color: transparent;
+  background-image: url("/images/site/small_check.jpg"), none;
+  /* background-image:; */
+  /* background-image: none; */
+}
+/* .background {
+  position: absolute;
+  background-image: none;
+} */
+
+/* this covers the entire body */
+#wrapper {
+  background-color: white;
+  border: solid;
+  border-color: rgb(103, 240, 190);
+  border-radius: 5px;
+  border-width: 5px;
+}
+
+
 }

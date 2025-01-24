@@ -10,7 +10,8 @@ VALUES (
         'Stark',
         'tony@startent.com',
         'Iam1ronM@n'
-    ) -- assignment 2 task 1 step 5.2
+    );
+-- assignment 2 task 1 step 5.2
 UPDATE account
 SET account_type = 'Admin'
 WHERE account_id = 1;
