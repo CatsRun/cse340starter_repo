@@ -242,3 +242,7 @@ SET inv_description = REPLACE(
         'small interiors',
         'a huge interior'
     );
+-- assignment 2 task 1 step 5.6
+UPDATE inventory
+SET inv_image = REPLACE(inv_image, 'images', 'images/vehicles'),
+    inv_thumbnail = REPLACE(inv_thumbnail, 'images', 'images/vehicles');
