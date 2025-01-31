@@ -11,6 +11,12 @@ const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
 
+// added wk04 THIS CRASHED THE TERMINAL**********************
+const baseController = require("./controllers/baseController")
+
+
+
+
 
 /* ***********************
  * View Engine and Templates
@@ -28,9 +34,12 @@ app.use(static)
 /* ***********************
  * Index Routes
  *************************/
-app.get("/",function(req, res){
-  res.render("index", {title: "Home"})
-})
+// app.get("/",function(req, res){
+//   res.render("index", {title: "Home"})
+// })
+
+//Index route
+app.get("/", baseController.buildHome)
 
 /* ***********************
  * Local Server Information

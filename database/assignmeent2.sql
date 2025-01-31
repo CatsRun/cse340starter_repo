@@ -29,9 +29,9 @@ SET inv_description = REPLACE(
 SELECT inventory.inv_make,
     inventory.inv_model,
     classification_name
-FROM inventory
-    INNER JOIN classification ON inv_model = classification_name;
--- assignment 2 task 1 step 5.6
+FROM inventory -- INNER JOIN classification ON inv_model = classification_name;
+    INNER JOIN classification ON inventory.classification_id = classification.classification_id
+WHERE classification.classification_name = 'Sport' -- assignment 2 task 1 step 5.6
 UPDATE inventory
 SET inv_image = REPLACE(inv_image, 'images', 'images/vehicles'),
     inv_thumbnail = REPLACE(inv_thumbnail, 'images', 'images/vehicles');
