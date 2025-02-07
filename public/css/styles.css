@@ -5,9 +5,16 @@
   box-sizing: border-box;
 }
 
+
 * {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
+#wrapper {
+  margin: 0;
+  width: 100%;
+}
+/* set width % to expand page */
 /******* header ***************/
 header {
   display: flex;
@@ -52,7 +59,14 @@ nav li {
   list-style: none;
 }
 
+nav a {
+  color: white;
+}
+
 /***************Body*************/
+h1 {
+  margin: 1rem;
+}
 
 
 .upgrades {
@@ -124,8 +138,9 @@ nav li {
 }
 
 
-
-/**************larger view***************/
+/* ************************************ */
+/************* larger view **************/
+/* ************************************ */
 @media screen and (min-width: 500px) { 
   
 .spects {
@@ -165,6 +180,7 @@ body {
   border-radius: 5px;
   border-width: 5px;
   padding: 1rem;
+  width: 75%;
 }
 
 /* .reviews {
@@ -176,6 +192,10 @@ body {
 .reviews ul {
   font-weight: 600;
   
+}
+
+nav ul {
+  justify-content: space-around;
 }
 
 }

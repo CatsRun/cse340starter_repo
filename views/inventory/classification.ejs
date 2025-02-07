@@ -1,0 +1,17 @@
+
+<!-- wk04 https://blainerobertson.github.io/340-js/views/classification-view.html -->
+<!-- EJS -->
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+<!-- this will display an error msg. used in wk05?
+ An EJS code block, using a comment mark (#), disables this code. In the future, when messages have been implemented, you'll replace the comment with the unescaped mark (—), while will allow any messages that have been set to be displayed.
+-->
+<%# messages() %>
+
+<!-- An EJS code block with an "unescaped" indicator —. This allows HTML to be displayed. Remember our grid variable contains HTML. -->
+<!-- HTML -->
+<%- grid %>
