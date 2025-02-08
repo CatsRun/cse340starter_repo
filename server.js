@@ -11,12 +11,12 @@ const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
 
-// added wk04 THIS CRASHED THE TERMINAL**********************
+
 const baseController = require("./controllers/baseController")
 
 const inventoryRoute = require("./routes/inventoryRoute.js")
-
-
+// added wk04 THIS CRASHED THE TERMINAL**********************
+// const utilities = require("./utilities/")
 
 /* ***********************
  * View Engine and Templates
@@ -42,6 +42,11 @@ app.use(static)
 
 //Index route
 app.get("/", baseController.buildHome)
+// utilities.handleErrors(app.get("/", baseController.buildHome))
+
+
+
+
 
 //****  wk04*** https://blainerobertson.github.io/340-js/views/inv-delivery-classification.html 
 // ** app.use() is an Express function that directs the application to use the resources passed in as parameters.
@@ -61,7 +66,7 @@ app.use(async (req, res, next) => {
 * Express Error Handler
 * Place after all other middleware
 * This allows 404 page not found and other error messages?
-* wk04
+* wk04 https://blainerobertson.github.io/340-js/views/basic-errors.htmlz
 *************************/
 // const invModel = require("../models/inventory-model")
 // is this right?

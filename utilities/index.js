@@ -107,3 +107,13 @@ Util.buildDetailGrid = async function(data){
   }
   return grid
 }
+
+
+
+// wk04 https://byui-cse.github.io/cse340-ww-content/views/error-handling.html
+/* ****************************************
+ * Middleware For Handling Errors
+ * Wrap other function in this for 
+ * General Error Handling
+ **************************************** */
+Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)

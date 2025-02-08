@@ -67,10 +67,9 @@ h1 {
   margin: 1rem;
 }
 
-/* h2 {
-  color: black;
-  margin: 50%;
-} */
+h2 {
+  margin-top: 0;
+}
 
 .upgrades {
   display: grid;
@@ -250,11 +249,18 @@ hr {
   #detail-display li {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding: 3rem;
+    /* padding: 3rem; */
   }
+
+  /* #detail-display a {
+    width: fit-content;
+    padding: 0;
+    background-color: aquamarine;
+  } */
 
   .detailNamePrice {
     display: grid;
+    padding-top: 0;
   }
 
   /* .detailNamePrice :nth-child(even) {
