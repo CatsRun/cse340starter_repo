@@ -33,9 +33,14 @@ async function getInventoryByInventoryId(inventory_id) {
   console.log(inventory_id + "look here")
   try {
     const data = await pool.query(
-    `SELECT * FROM inventory
+    `SELECT * FROM public.inventory
     WHERE inv_id = $1`,
     [inventory_id]
+
+
+
+
+    
   )
 
     return data.rows

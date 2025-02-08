@@ -23,6 +23,10 @@ invCont.buildByClassificationId = async function (req, res, next) {
 
 module.exports = invCont
 
+
+/* ***************************
+ *  Build inventory by inventory view
+ * ************************** */
 // wk05 assignment https://byui-cse.github.io/cse340-ww-content/assignments/assign3.html
 //  detail view == buildByInventorylId
 invCont.buildByInventoryId = async function (req, res, next) {
@@ -30,9 +34,12 @@ invCont.buildByInventoryId = async function (req, res, next) {
     const data = await invModel.getInventoryByInventoryId(inventory_id)
     const grid = await utilities.buildDetailGrid(data)
     let nav = await utilities.getNav()
-    const className = data[0].classification_name
+    let in_make = data[0].inv_make
+    let in_model = data[0].inv_model
+    let in_year = data[0].inv_year
+    // what does res.render mean?
     res.render("./inventory/detail", {
-      title: className + " vehicles",
+      title: in_year +" " + in_make + " " + in_model,
       nav,
       grid,
     })
