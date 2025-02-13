@@ -56,10 +56,17 @@ app.get("/", baseController.buildHome)
 // Inventory routes
 app.use("/inv", inventoryRoute)
 
+// app.use(async (req, res, next) => {
+//   next({status: 500, message: 'Sorry, we appear to have lost that page.'})
+// })
+
+
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
 })
+
+
 
 
 /* ***********************

@@ -87,7 +87,7 @@ Util.buildDetailGrid = async function(data){
       // + vehicle.inv_make + ' ' + vehicle.inv_model + ' ' + vehicle.inv_year + ' details">' 
       // + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
       grid += '</h2>'
-      grid += '<span id="desc_row">' 
+      grid += '<span class="desc_row">' 
       + 'Price: $' + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
       // add details description
       grid += '<p>'
@@ -95,7 +95,7 @@ Util.buildDetailGrid = async function(data){
       // I can change the <strong> to  <span class="first_word"> and then style with CSS 
       + '<span>Description:</span> ' + vehicle.inv_description + '</p>'
       grid += '<p>' 
-      + '<span id="desc_row">Color:</span> ' + vehicle.inv_color + '</p>'
+      + '<span class="desc_row">Color:</span> ' + vehicle.inv_color + '</p>'
       grid += '<p>' 
       + '<span>Milies:</span> ' + new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + '</p>'
       grid += '</div>'
