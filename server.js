@@ -15,8 +15,32 @@ const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 
 const inventoryRoute = require("./routes/inventoryRoute.js")
+
+// wk06 https://blainerobertson.github.io/340-js/views/session-message.html
+// the session, and access to the database connection
+const session = require("express-session")
+const pool = require('./database/')
+
 // added wk04 THIS CRASHED THE TERMINAL**********************
 // const utilities = require("./utilities/")
+
+// wk06 https://blainerobertson.github.io/340-js/views/session-message.html
+/* ***********************
+ * Middleware
+ * ************************/
+app.use(session({
+  store: new (require('connect-pg-simple')(session))({
+    createTableIfMissing: true,
+    pool,
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  name: 'sessionId',
+}))
+
+
+
 
 /* ***********************
  * View Engine and Templates
