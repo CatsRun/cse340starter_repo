@@ -44,6 +44,10 @@ app.use(static)
 app.get("/", baseController.buildHome)
 // utilities.handleErrors(app.get("/", baseController.buildHome))
 
+// wk05
+app.get("/error", async (req, res, next) => {
+    next({status: 500, message: 'Sorry, there appears to be a server error.'})
+  })
 
 
 
@@ -55,10 +59,6 @@ app.get("/", baseController.buildHome)
 
 // Inventory routes
 app.use("/inv", inventoryRoute)
-
-// app.use(async (req, res, next) => {
-//   next({status: 500, message: 'Sorry, we appear to have lost that page.'})
-// })
 
 
 // File Not Found Route - must be last route in list
