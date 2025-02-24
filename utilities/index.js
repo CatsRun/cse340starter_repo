@@ -109,6 +109,18 @@ Util.buildDetailGrid = async function(data){
 }
 
 
+// wk06 https://blainerobertson.github.io/340-js/views/account-login.html
+/* ****************************************
+ * Build login view
+ **************************************** */
+
+
+// module.exports = Util
+
+
+
+
+
 
 // wk04 https://byui-cse.github.io/cse340-ww-content/views/error-handling.html
 /* ****************************************

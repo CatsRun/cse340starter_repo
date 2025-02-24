@@ -16,6 +16,9 @@ const baseController = require("./controllers/baseController")
 
 const inventoryRoute = require("./routes/inventoryRoute.js")
 
+// wk06 https://blainerobertson.github.io/340-js/views/account-login.html
+const accountRoute = require("./routes/accountRoute.js")
+
 // wk06 https://blainerobertson.github.io/340-js/views/session-message.html
 // the session, and access to the database connection
 const session = require("express-session")
@@ -39,6 +42,12 @@ app.use(session({
   name: 'sessionId',
 }))
 
+// Express Messages Middleware
+app.use(require('connect-flash')())
+app.use(function(req, res, next){
+  res.locals.messages = require('express-messages')(req, res)
+  next()
+})
 
 
 
@@ -55,6 +64,15 @@ app.set("layout", "./layouts/layout") // not at views root
  *************************/
 app.use(static)
 
+// https://blainerobertson.github.io/340-js/views/account-login.html 
+// from the video
+app.use(require("./routes/static.js"))
+// app.get asdf
+
+
+
+
+
 
 
 /* ***********************
@@ -66,7 +84,7 @@ app.use(static)
 
 //Index route
 app.get("/", baseController.buildHome)
-// utilities.handleErrors(app.get("/", baseController.buildHome))
+// app.get("/", utilities.handleErrors(baseController.buildHome))
 
 // wk05
 app.get("/error", async (req, res, next) => {
@@ -82,8 +100,11 @@ app.get("/error", async (req, res, next) => {
 // ** inventoryRoute is the variable representing the inventoryRoute.js file which was required (brought into the scope of the server.js file) earlier.
 
 // Inventory routes
-app.use("/inv", inventoryRoute)
 
+// app.use("/inv", inventoryRoute)
+app.use("/inv", require("./routes/inventoryRoute"))
+
+app.use("/account", require("./routes/accountRoute"))
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
@@ -96,7 +117,7 @@ app.use(async (req, res, next) => {
 /* ***********************
 * Express Error Handler
 * Place after all other middleware
-* This allows 404 page not found and other error messages?
+* This allows 404 page not found and other error messages
 * wk04 https://blainerobertson.github.io/340-js/views/basic-errors.htmlz
 *************************/
 // const invModel = require("../models/inventory-model")

@@ -18,3 +18,5 @@ router.get("/detail/:inventoryId", invController.buildByInventoryId);
 
 module.exports = router;
 
+
+
