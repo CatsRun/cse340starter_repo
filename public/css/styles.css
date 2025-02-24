@@ -172,6 +172,43 @@ hr {
   margin-left: -5%;
 }
 
+/************** Form ********************/
+.form {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 1rem 0;
+  padding: 1rem;
+  /* text-align: center; */
+}
+
+.form label {
+  /* moved itemes from inline to stacked */
+  display: block;
+  padding-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.form input {
+  /* border: none; */
+  /* background-image: linear-gradient(green, rgb(212, 110, 31), brown); */
+  /* background-color: #3c3c3ccd;
+  color: white; */
+  /* display: block; */
+  border-radius: 6px;
+  padding: 0.8rem;
+  width: 96%;
+  /* max-width: 400px; */
+  margin: 0.5rem;
+}
+
+.form input[type="submit"] {
+  display: flex;
+  max-width: 40%;
+  justify-content: center;
+  align-items: center;
+}
+
 /* ************************************ */
 /************* larger view **************/
 /* ************************************ */
@@ -266,4 +303,12 @@ hr {
   /* .detailNamePrice :nth-child(even) {
     background-color: rgba(128, 128, 128, 0.174);
   } */
+
+  /******************** Form *******************/
+  .form {
+    margin: auto;
+    width: 50%;
+    /* border: 3px solid green; */
+    padding: 10px;
+  }
 }
