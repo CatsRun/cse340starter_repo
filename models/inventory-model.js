@@ -36,13 +36,7 @@ async function getInventoryByInventoryId(inventory_id) {
     `SELECT * FROM public.inventory
     WHERE inv_id = $1`,
     [inventory_id]
-
-
-
-
-    
   )
-
     return data.rows
   } catch (error) {
     console.error("getInventoryByInventoryId error " + error)
@@ -50,11 +44,6 @@ async function getInventoryByInventoryId(inventory_id) {
 
 
 }
-
-
-
-
-
 
 
 // module.exports = {getClassifications}

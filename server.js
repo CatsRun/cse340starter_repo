@@ -25,7 +25,13 @@ const session = require("express-session")
 const pool = require('./database/')
 
 // added wk04 THIS CRASHED THE TERMINAL**********************
-// const utilities = require("./utilities/")
+const utilities = require("./utilities/")
+
+// https://blainerobertson.github.io/340-js/views/account-process-register.html
+const bodyParser = require("body-parser")
+
+
+
 
 // wk06 https://blainerobertson.github.io/340-js/views/session-message.html
 /* ***********************
@@ -49,6 +55,9 @@ app.use(function(req, res, next){
   next()
 })
 
+// https://blainerobertson.github.io/340-js/views/account-process-register.html
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 
 /* ***********************
@@ -83,8 +92,9 @@ app.use(require("./routes/static.js"))
 // })
 
 //Index route
-app.get("/", baseController.buildHome)
-// app.get("/", utilities.handleErrors(baseController.buildHome))
+
+// app.get("/", baseController.buildHome)
+app.get("/", utilities.handleErrors(baseController.buildHome))
 
 // wk05
 app.get("/error", async (req, res, next) => {
@@ -106,6 +116,8 @@ app.use("/inv", require("./routes/inventoryRoute"))
 
 app.use("/account", require("./routes/accountRoute"))
 
+
+
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
@@ -122,7 +134,7 @@ app.use(async (req, res, next) => {
 *************************/
 // const invModel = require("../models/inventory-model")
 // is this right?
-const utilities = require("./utilities/index.js")
+// const utilities = require("./utilities/index.js")
 
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()

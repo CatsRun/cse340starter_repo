@@ -91,7 +91,7 @@ h2 {
   max-height: 133px;
 }
 
-.upgrades figure {
+.upgrades p {
   text-align: center;
 }
 .reviews {
@@ -187,6 +187,7 @@ hr {
   display: block;
   padding-top: 1rem;
   font-size: 0.9rem;
+  max-width: 400px;
 }
 
 .form input {
@@ -198,17 +199,27 @@ hr {
   border-radius: 6px;
   padding: 0.8rem;
   width: 96%;
-  /* max-width: 400px; */
-  margin: 0.5rem;
+  margin-top: 0.2rem;
 }
 
 .form input[type="submit"] {
-  display: flex;
   max-width: 40%;
-  justify-content: center;
-  align-items: center;
+  margin-top: 1rem;
 }
 
+.form figcaption {
+  font-size: small;
+  font-style: italic;
+  margin: 0 0 0 0.2rem;
+}
+
+.form button {
+  max-width: 40%;
+  margin-top: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  padding: 1rem;
+}
 /* ************************************ */
 /************* larger view **************/
 /* ************************************ */

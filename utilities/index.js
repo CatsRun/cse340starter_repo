@@ -24,7 +24,7 @@ Util.getNav = async function (req, res, next) {
   return list
 }
 
-module.exports = Util
+// module.exports = Util
 
 
 // wk04 https://blainerobertson.github.io/340-js/views/inv-delivery-classification.html
@@ -129,3 +129,5 @@ Util.buildDetailGrid = async function(data){
  * General Error Handling
  **************************************** */
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+
+module.exports = Util
