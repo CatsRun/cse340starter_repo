@@ -220,6 +220,29 @@ hr {
   border-radius: 10px;
   padding: 1rem;
 }
+
+input:required:invalid,
+input:focus:invalid {
+  background-color: rgba(255, 0, 0, 0.105);
+}
+
+input:required:valid {
+  background-color: #59d4443c;
+}
+
+/* textarea form formatting */
+/* input:required:invalid,
+input:focus:invalid {
+  background-image: url(/images/invalid.png);
+  background-position: right top;
+  background-repeat: no-repeat;
+}
+input:required:valid {
+  background-image: url(/images/valid.png);
+  background-position: right top;
+  background-repeat: no-repeat;
+} */
+
 /* ************************************ */
 /************* larger view **************/
 /* ************************************ */
