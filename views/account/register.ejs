@@ -6,6 +6,17 @@
 
 <%- messages() %>
 
+<!-- all errors could be displayed https://blainerobertson.github.io/340-js/views/server-validation.html -->
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+
+  
+
 <div class="form">
     <form action="/account/register" method="post">
         <fieldset>

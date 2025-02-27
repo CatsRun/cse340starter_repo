@@ -30,6 +30,7 @@ const accountModel = require("../models/account-model")
 async function buildRegister(req, res, next) {
   let nav = await utilities.getNav()
   res.render("account/register", {
+    errors: null,
     title: "Register",
     nav,
   })
