@@ -15,15 +15,16 @@
    </ul>
   <% } %>
 
-  
+
 
 <div class="form">
     <form action="/account/register" method="post">
         <fieldset>
             <p>All fields are required.</p>
-            <label>First Name <input type="text" name="account_firstname" required></label>
-            <label>Last Name <input type="text" name="account_lastname" required></label>
-            <label>Email <input type="email" name="account_email" placeholder="yourEmail@place.com" required></label>
+            <!-- <label>First Name <input type="text" name="account_firstname" required></label>    sticky form inputs   id="accountFirstname" required value="<%# locals.account_firstname %>" -->
+            <label>First Name <input type="text" name="account_firstname" id="accountFirstname" required value="<%= locals.account_firstname %>">                
+            <label>Last Name <input type="text" name="account_lastname" id="accountLastname" required value="<%= locals.account_lastname %>"></label>
+            <label>Email <input type="email" name="account_email" placeholder="yourEmail@place.com" id="accountEmail" required value="<%= locals.account_email %>"></label>
             <label>Password: <input type="password" name="account_password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" required> 
             </label>
             <!-- <label>Password: <input type="password" name="account_password" required></label> -->

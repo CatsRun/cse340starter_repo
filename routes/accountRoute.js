@@ -20,7 +20,10 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin))
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
 // router.get("/register", (accountController.buildRegister))
 
-// *** post ***
+
+// ********************
+// ******* post *******
+// ********************
 // router.post('/register', utilities.handleErrors(accountController.registerAccount))
 
 // Process the registration data
@@ -30,6 +33,16 @@ router.post(
     regValidate.registationRules(),
     regValidate.checkRegData,
     utilities.handleErrors(accountController.registerAccount)
+  )
+
+
+//   testing validation temp  https://blainerobertson.github.io/340-js/views/stickiness.html
+// Process the login attempt
+router.post(
+    "/login",
+    (req, res) => {
+      res.status(200).send('login process')
+    }
   )
 
 module.exports = router;
