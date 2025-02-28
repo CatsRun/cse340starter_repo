@@ -3,5 +3,46 @@
     <% } else {
       res.redirect('/')
     } %>    
-    
-    <p>Does this work?</p>
+
+<%- messages() %>
+<h2><%# classificationList %></h2>
+<div class="form">
+    <form id="addinventory" action="/inventory/addinventory" method="post">
+        <fieldset>
+            <%- classificationList %>
+            
+            <label for="">Make*</label>
+            <input type="text" name="inv_make" id="inv_make" pattern="[A-Za-z]+" required value="<%= locals.inv_make %>">
+            <!-- make name, id auto populate from database -->
+            
+            <label for="inv_model">Model*</label>
+            <input type="text" name="inv_model" id="inv_model" pattern="[A-Za-z0-9 \-]+" required value="<%= locals.inv_model %>">
+            
+            <label for="inv_description">Description*</label>
+            <textarea name="inv_description" id="inv_description" rows="3" required value="<%= locals.inv_description %>"></textarea>
+
+            <label for="">Image path*</label>
+            <input type="text" name="" id="" pattern="[A-Za-z]+" required value="<%= locals.addNameHere %>">
+
+            <label for="">Thumbnail path*</label>
+            <input type="text" name="" id="" pattern="[A-Za-z]+" required value="<%= locals.addNameHere %>">
+
+            <label for="inv_price">Price*</label>
+            <input type="text" name="inv_price" id="inv_price" title="Numbers only" pattern="[0-9]+" required value="<%= locals.inv_price %>">
+
+            <label for="inv_year">Year*</label>
+            <input type="text" name="inv_year" id="inv_year" title="4 digit year" pattern="[0-9]{4}" required value="<%= locals.inv_year %>">
+
+            <label for="inv_miles">Miles*</label>
+            <input type="number" name="inv_miles" id="inv_miles" title="Numbers only" pattern="[0-9]+" required value="<%= locals.inv_miles %>">
+
+            <label for="inv_color">Color*</label>
+            <input type="text" name="inv_color" id="inv_color" pattern="[A-Za-z0-9 ]+" required value="<%= locals.inv_color %>">
+            
+            <div><i> * Required field</i></div>
+            
+        </fieldset>
+        <button type="submit">Add Vehicle</button>
+    </form>
+
+</div>

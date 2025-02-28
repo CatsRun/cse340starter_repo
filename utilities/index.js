@@ -109,15 +109,31 @@ Util.buildDetailGrid = async function(data){
 }
 
 
-// wk06 https://blainerobertson.github.io/340-js/views/account-login.html
+// https://byui-cse.github.io/cse340-ww-content/assignments/assign4.html
 /* ****************************************
- * Build login view
+ * Build Add Inventory view
  **************************************** */
 
+// ***** Classification dropdown menu*****
 
-// module.exports = Util
-
-
+Util.buildClassificationList = async function (classification_id = null) {
+  let data = await invModel.getClassifications()
+  let classificationList =
+    '<select name="classification_id" id="classificationList" required>'
+  classificationList += "<option value=''>Choose a Classification</option>"
+  data.rows.forEach((row) => {
+    classificationList += '<option value="' + row.classification_id + '"'
+    if (
+      classification_id != null &&
+      row.classification_id == classification_id
+    ) {
+      classificationList += " selected "
+    }
+    classificationList += ">" + row.classification_name + "</option>"
+  })
+  classificationList += "</select>"
+  return classificationList
+}
 
 
 

@@ -8,21 +8,22 @@
 const express = require("express")
 const router = new express.Router() 
 const invController = require("../controllers/invController")
+const utilities = require("../utilities/")
 
 // Route to build inventory by classification view
-router.get("/type/:classificationId", invController.buildByClassificationId);
+router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));
 
 // wk05 assignment https://byui-cse.github.io/cse340-ww-content/assignments/assign3.html
-router.get("/detail/:inventoryId", invController.buildByInventoryId);
+router.get("/detail/:inventoryId", utilities.handleErrors(invController.buildByInventoryId));
 
 // https://byui-cse.github.io/cse340-ww-content/assignments/assign4.html
-router.get("/", invController.buildManagement);
+router.get("/", utilities.handleErrors(invController.buildManagement));
 
 // https://byui-cse.github.io/cse340-ww-content/assignments/assign4.html
-router.get("/newclassification", invController.buildNewClassification);
+router.get("/newclassification", utilities.handleErrors(invController.buildNewClassification));
 
 // https://byui-cse.github.io/cse340-ww-content/assignments/assign4.html
-router.get("/addinventory", invController.buildAddInventory);
+router.get("/addinventory", utilities.handleErrors(invController.buildAddInventory));
 
 module.exports = router;
 

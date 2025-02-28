@@ -55,7 +55,7 @@ invCont.buildManagement = async function (req, res, next)
   {
     let nav = await utilities.getNav()
     res.render("./inventory/management", {
-      title: "Inventory " + "Management",
+      title: "Vehicle " + "Management",
       nav,
     })
   }
@@ -82,12 +82,28 @@ invCont.buildNewClassification = async function (req, res, next)
 invCont.buildAddInventory = async function (req, res, next)
 {
   let nav = await utilities.getNav()
+  let classificationList = await utilities.buildClassificationList()
+  const classification_id = req.params. classificationId
   res.render("./inventory/addinventory", {
-    title: "New Inventory",
+    title: "Add New Vehicle",
     nav,
+    classificationList,
+    classification_id,
   })
 }
 
 
+// ***** Build Classification View Drop Down ***********
+// classificationList
+// invCont.buildByClassificationViewDropDown = async function (req, res, next)
+
+// invCont.classificationList = async function (req, res, next)
+// {
+//   let classification_name = await utilities.get()
+//   res.render("./inventory/addinventory"), {
+//     title: classificationList
+//   }
+
+// }
 
   module.exports = invCont

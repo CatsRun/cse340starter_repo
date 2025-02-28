@@ -4,4 +4,17 @@
       res.redirect('/')
     } %>    
     
-    <p>Does this work?</p>
+    <%- messages() %>
+
+    <div class="form">
+        <form id="newclassification" action="/inventory/newclassification" method="post">
+            <fieldset>
+                <label for="classification_name">Classification Name*</label>
+                <input type="text" name="classification_name" id="classification_name" pattern="[A-Za-z]+" required>                
+                <div><i> * Required field</i></div>
+                <div><i> ** Must only have letters. No numbers, symbols or spaces.</i></div>
+            </fieldset>
+            <button type="submit">Add Classification</button>
+        </form>
+
+    </div>
