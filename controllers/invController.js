@@ -21,7 +21,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
   })
 } 
 
-module.exports = invCont
+
 
 
 /* ***************************
@@ -44,3 +44,21 @@ invCont.buildByInventoryId = async function (req, res, next) {
       grid,
     })
   }
+
+
+
+/* ***************************
+ *  Build management view
+ * ************************** */
+//  https://byui-cse.github.io/cse340-ww-content/assignments/assign4.html
+invCont.buildManagement = async function (req, res, next)
+  {
+    let nav = await utilities.getNav()
+    res.render("./inventory/management", {
+      title: "Inventory " + "Management",
+      nav,
+    })
+  }
+
+
+  module.exports = invCont

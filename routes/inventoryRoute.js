@@ -15,6 +15,8 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 // wk05 assignment https://byui-cse.github.io/cse340-ww-content/assignments/assign3.html
 router.get("/detail/:inventoryId", invController.buildByInventoryId);
 
+// https://byui-cse.github.io/cse340-ww-content/assignments/assign4.html
+router.get("/", invController.buildManagement);
 
 module.exports = router;
 
