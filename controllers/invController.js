@@ -61,4 +61,33 @@ invCont.buildManagement = async function (req, res, next)
   }
 
 
+
+  /* ***************************
+ *  Build add-classification view
+ * ************************** */
+//  https://byui-cse.github.io/cse340-ww-content/assignments/assign4.html
+invCont.buildNewClassification = async function (req, res, next)
+{
+  let nav = await utilities.getNav()
+  res.render("./inventory/newclassification", {
+    title: "New Classification",
+    nav,
+  })
+}
+
+  /* ***************************
+ *  Build Add Inventory view
+ * ************************** */
+//  https://byui-cse.github.io/cse340-ww-content/assignments/assign4.html
+invCont.buildAddInventory = async function (req, res, next)
+{
+  let nav = await utilities.getNav()
+  res.render("./inventory/addinventory", {
+    title: "New Inventory",
+    nav,
+  })
+}
+
+
+
   module.exports = invCont

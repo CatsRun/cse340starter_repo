@@ -30,7 +30,7 @@ router.get("/register", utilities.handleErrors(accountController.buildRegister))
 // https://blainerobertson.github.io/340-js/views/server-validation.html
 router.post(
     "/register",
-    regValidate.registationRules(),
+    regValidate.registrationRules(),
     regValidate.checkRegData,
     utilities.handleErrors(accountController.registerAccount)
   )

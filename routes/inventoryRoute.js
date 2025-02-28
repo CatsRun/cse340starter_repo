@@ -18,6 +18,12 @@ router.get("/detail/:inventoryId", invController.buildByInventoryId);
 // https://byui-cse.github.io/cse340-ww-content/assignments/assign4.html
 router.get("/", invController.buildManagement);
 
+// https://byui-cse.github.io/cse340-ww-content/assignments/assign4.html
+router.get("/newclassification", invController.buildNewClassification);
+
+// https://byui-cse.github.io/cse340-ww-content/assignments/assign4.html
+router.get("/addinventory", invController.buildAddInventory);
+
 module.exports = router;
 
 
