@@ -107,17 +107,17 @@ invCont.addClassification = async function (req, res, next)
   let nav = await utilities.getNav()
   const { classification_name } = req.body
 
-  try {
-    // regular password and cost (salt is generated automatically)
-    hashedPassword = await bcrypt.hashSync(account_password, 10)
-  } catch (error) {
-    req.flash("notice", 'Sorry, there was an error processing the request.')
-    res.status(500).render("inv/newclassification", {
-      title: "Add New Classification",
-      nav,
-      errors: null,
-    })
-  }
+  // try {
+  //   // regular password and cost (salt is generated automatically)
+  //   hashedPassword = await bcrypt.hashSync(account_password, 10)
+  // } catch (error) {
+  //   req.flash("notice", 'Sorry, there was an error processing the request.')
+  //   res.status(500).render("./inventory/newclassification", {
+  //     title: "Add New Classification",
+  //     nav,
+  //     errors: null,
+  //   })
+  // }
 
   const regResult = await invModel.addClassification(
     classification_name
@@ -126,17 +126,22 @@ invCont.addClassification = async function (req, res, next)
   if (regResult) {
     req.flash(
       "notice",
-      `It worked! ${classification_name} was added to the nav bar. Be sure to remove it before you continue.`
+      `It worked! ${classification_name} was added to the navigation bar.`
     )
-    res.status(201).render("inv/newclassification", {
-      title: "New Classification",
-      nav,
+    res.status(201).render("./inventory/management", {
+      title: "Vehicle Management",
+      nav, //why is this nav bar not refreshing when the item is
+      errors: null,
     })
+
+
+
   } else {
     req.flash("notice", "Sorry, it failed.")
-    res.status(501).render("inv/newclassification", {
+    res.status(501).render("./inventory/newclassification", {
       title: "New Classification",
       nav,
+      errors: null,
     }
   )
   }
