@@ -45,6 +45,24 @@ async function getInventoryByInventoryId(inventory_id) {
 
 }
 
+// ******************************************
+// ***** add new classification to nav*******
+// ******************************************
+// reference old asignment: https://byui-cse.github.io/cse340-ww-content/views/account-process-register.html
+// current asignment: 
+
+async function addClassification(classification_name){
+  try {
+    const sql = "INSERT INTO classification (classification_name) VALUES ($1) RETURNING *"
+    return await pool.query(sql, [classification_name])
+  } catch (error) {
+    return error.message
+  }
+}
+
+
+
+
 
 // module.exports = {getClassifications}
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByInventoryId};
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByInventoryId, addClassification};

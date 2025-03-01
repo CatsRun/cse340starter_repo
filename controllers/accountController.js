@@ -21,6 +21,7 @@ const bcrypt = require("bcryptjs")
     res.render("account/login", {
       title: "Login",
       nav,
+      errors: null,
     })
   }
 

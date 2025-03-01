@@ -25,6 +25,26 @@ router.get("/newclassification", utilities.handleErrors(invController.buildNewCl
 // https://byui-cse.github.io/cse340-ww-content/assignments/assign4.html
 router.get("/addinventory", utilities.handleErrors(invController.buildAddInventory));
 
+
+
+// ********************
+// ******* post *******
+// ********************
+
+// add new classification to nav
+router.post(
+    "/newclassification",
+    // regValidate.registrationRules(),
+    // regValidate.checkRegData,
+    utilities.handleErrors(invController.addClassification)
+  )
+
+
+
+
+
+
+
 module.exports = router;
 
 

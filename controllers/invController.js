@@ -18,6 +18,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
     title: className + " vehicles",
     nav,
     grid,
+    errors: null,
   })
 } 
 
@@ -42,6 +43,7 @@ invCont.buildByInventoryId = async function (req, res, next) {
       title: in_year +" " + in_make + " " + in_model,
       nav,
       grid,
+      errors: null,
     })
   }
 
@@ -57,6 +59,7 @@ invCont.buildManagement = async function (req, res, next)
     res.render("./inventory/management", {
       title: "Vehicle " + "Management",
       nav,
+      errors: null,
     })
   }
 
@@ -72,6 +75,7 @@ invCont.buildNewClassification = async function (req, res, next)
   res.render("./inventory/newclassification", {
     title: "New Classification",
     nav,
+    errors: null,
   })
 }
 
@@ -89,21 +93,53 @@ invCont.buildAddInventory = async function (req, res, next)
     nav,
     classificationList,
     classification_id,
+    errors: null,
   })
 }
 
 
-// ***** Build Classification View Drop Down ***********
-// classificationList
-// invCont.buildByClassificationViewDropDown = async function (req, res, next)
+// ******************************************
+// ***** add new classification to nav ******
+// ******************************************
+// async function addClassification(req, res) 
+invCont.addClassification = async function (req, res, next)
+{
+  let nav = await utilities.getNav()
+  const { classification_name } = req.body
 
-// invCont.classificationList = async function (req, res, next)
-// {
-//   let classification_name = await utilities.get()
-//   res.render("./inventory/addinventory"), {
-//     title: classificationList
-//   }
+  try {
+    // regular password and cost (salt is generated automatically)
+    hashedPassword = await bcrypt.hashSync(account_password, 10)
+  } catch (error) {
+    req.flash("notice", 'Sorry, there was an error processing the request.')
+    res.status(500).render("inv/newclassification", {
+      title: "Add New Classification",
+      nav,
+      errors: null,
+    })
+  }
 
-// }
+  const regResult = await invModel.addClassification(
+    classification_name
+  )
+
+  if (regResult) {
+    req.flash(
+      "notice",
+      `It worked! ${classification_name} was added to the nav bar. Be sure to remove it before you continue.`
+    )
+    res.status(201).render("inv/newclassification", {
+      title: "New Classification",
+      nav,
+    })
+  } else {
+    req.flash("notice", "Sorry, it failed.")
+    res.status(501).render("inv/newclassification", {
+      title: "New Classification",
+      nav,
+    }
+  )
+  }
+}
 
   module.exports = invCont
