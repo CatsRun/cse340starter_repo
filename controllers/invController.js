@@ -104,7 +104,7 @@ invCont.buildAddInventory = async function (req, res, next)
 // async function addClassification(req, res) 
 invCont.addClassification = async function (req, res, next)
 {
-  let nav = await utilities.getNav()
+  
   const { classification_name } = req.body
 
   // try {
@@ -123,18 +123,20 @@ invCont.addClassification = async function (req, res, next)
     classification_name
   )
 
+  let nav = await utilities.getNav()
+    
   if (regResult) {
     req.flash(
       "notice",
       `It worked! ${classification_name} was added to the navigation bar.`
     )
+
+    // res.redirect("./inv/management", {   //this uses .redirect instead of rebuilding the page with .render
     res.status(201).render("./inventory/management", {
       title: "Vehicle Management",
       nav, //why is this nav bar not refreshing when the item is
       errors: null,
     })
-
-
 
   } else {
     req.flash("notice", "Sorry, it failed.")
