@@ -114,7 +114,7 @@ Util.buildDetailGrid = async function(data){
  * Build Add Inventory view
  **************************************** */
 
-// ***** Classification dropdown menu*****
+// ***** Classification dropdown menu in newclassification.ejs*****
 
 Util.buildClassificationList = async function (classification_id = null) {
   let data = await invModel.getClassifications()

@@ -49,7 +49,7 @@ async function getInventoryByInventoryId(inventory_id) {
 // ***** add new classification to nav*******
 // ******************************************
 // reference old asignment: https://byui-cse.github.io/cse340-ww-content/views/account-process-register.html
-// current asignment: 
+// current asignment: https://byui-cse.github.io/cse340-ww-content/assignments/assign4.html 
 
 async function addClassification(classification_name){
   try {
@@ -61,8 +61,27 @@ async function addClassification(classification_name){
 }
 
 
+// ******************************************
+// *     add new inventory
+// ******************************************
+// reference old asignment: https://byui-cse.github.io/cse340-ww-content/views/account-process-register.html
+
+async function addInventory(
+  classification_id, inv_make,  inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color
+)
+{console.log("Look here:  " + classification_id, inv_make,  inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color)
+  try {
+    const sql = "INSERT INTO inventory (classification_id,inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color) VALUES ($1, $2, $3, $4,$5, $6, $7, $8, $9, $10) RETURNING *"
+    return await pool.query(sql, [classification_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color])
+  } catch (error) {
+    return error.message
+  }
+  
+}
+
+
 
 
 
 // module.exports = {getClassifications}
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByInventoryId, addClassification};
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByInventoryId, addClassification, addInventory};

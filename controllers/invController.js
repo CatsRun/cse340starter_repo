@@ -82,6 +82,7 @@ invCont.buildNewClassification = async function (req, res, next)
   /* ***************************
  *  Build Add Inventory view
  * ************************** */
+// dropdown menue inventory > addinventory
 //  https://byui-cse.github.io/cse340-ww-content/assignments/assign4.html
 invCont.buildAddInventory = async function (req, res, next)
 {
@@ -101,7 +102,6 @@ invCont.buildAddInventory = async function (req, res, next)
 // ******************************************
 // ***** add new classification to nav ******
 // ******************************************
-// async function addClassification(req, res) 
 invCont.addClassification = async function (req, res, next)
 {
   
@@ -131,7 +131,7 @@ invCont.addClassification = async function (req, res, next)
       `It worked! ${classification_name} was added to the navigation bar.`
     )
 
-    // res.redirect("./inv/management", {   //this uses .redirect instead of rebuilding the page with .render
+    // res.redirect("./inventory/management", {   //this uses .redirect instead of rebuilding the page with .render
     res.status(201).render("./inventory/management", {
       title: "Vehicle Management",
       nav, //why is this nav bar not refreshing when the item is
@@ -148,5 +148,60 @@ invCont.addClassification = async function (req, res, next)
   )
   }
 }
+
+
+// addInventory
+// ******************************************
+// *          add new Inventory 
+// ****************************************** 
+invCont.addInventory = async function (req, res, next)
+{
+  let nav = await utilities.getNav()
+  const { classification_id, inv_make,  inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color } = req.body
+
+  // try {
+  //   // regular password and cost (salt is generated automatically)
+  //   hashedPassword = await bcrypt.hashSync(account_password, 10)
+  // } catch (error) {
+  //   req.flash("notice", 'Sorry, there was an error processing the request.')
+  //   res.status(500).render("./inventory/newclassification", {
+  //     title: "Add New Classification",
+  //     nav,
+  //     errors: null,
+  //   })
+  // }
+
+  const regResult = await invModel.addInventory(
+    classification_id, inv_make,  inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color
+    
+  )
+    console.log(classification_id)
+  if (regResult) {
+    req.flash(
+      "notice",
+      `It worked! Your vehicle was added.`
+      // `It worked! ${inv_year, inv_make, inv_model} was added.`
+    )
+
+    // res.redirect("./inventory/management", {   //this uses .redirect instead of rebuilding the page with .render
+    res.status(201).render("./inventory/management", {
+      title: "Vehicle Management",
+      nav, //why is this nav bar not refreshing when the item is
+      errors: null,
+    })
+
+  } else {
+    req.flash("notice", "Sorry, it failed.")
+    res.status(501).render("./inventory/addinvetory", {
+      title: "Add New Vehicle",
+      nav,
+      errors: null,
+    }
+  )
+  }
+}
+
+
+
 
   module.exports = invCont

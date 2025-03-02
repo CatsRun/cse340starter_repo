@@ -10,6 +10,12 @@ const router = new express.Router()
 const invController = require("../controllers/invController")
 const utilities = require("../utilities/")
 
+// https://blainerobertson.github.io/340-js/views/server-validation.html
+
+// ***
+const regValidateClass = require('../utilities/inventory-validation')
+const regValidate = require('../utilities/addinventory-validation')
+
 // Route to build inventory by classification view
 router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));
 
@@ -34,13 +40,19 @@ router.get("/addinventory", utilities.handleErrors(invController.buildAddInvento
 // add new classification to nav
 router.post(
     "/newclassification",
-    // regValidate.registrationRules(),
-    // regValidate.checkRegData,
+    regValidateClass.classRules(),
+    regValidateClass.checkRegData,
     utilities.handleErrors(invController.addClassification)
   )
 
 
-
+// add new inventory to database
+router.post(
+    "/addinventory",
+    regValidate.inventoryRules(),
+    regValidate.checkRegData,
+    utilities.handleErrors(invController.addInventory)
+  )
 
 
 
