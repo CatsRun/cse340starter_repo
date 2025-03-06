@@ -30,7 +30,8 @@ const utilities = require("./utilities/")
 // https://blainerobertson.github.io/340-js/views/account-process-register.html
 const bodyParser = require("body-parser")
 
-
+// https://blainerobertson.github.io/340-js/views/login.html
+const cookieParser = require("cookie-parser")
 
 
 // wk06 https://blainerobertson.github.io/340-js/views/session-message.html
@@ -125,6 +126,8 @@ app.use(async (req, res, next) => {
 
 
 
+// https://blainerobertson.github.io/340-js/views/login.html
+app.use(cookieParser())
 
 /* ***********************
 * Express Error Handler

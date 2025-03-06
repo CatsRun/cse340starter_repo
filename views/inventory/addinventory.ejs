@@ -17,7 +17,7 @@
 <div class="form">
     <form id="addinventory" action="/inv/addinventory" method="post">
         <fieldset>
-            <%- classificationList %>
+            <%- classificationList %> <!-- why does thie error in the inv/addinventory error view?-->
             
             <label for="inv_make">Make*</label>
             <input type="text" name="inv_make" id="inv_make" pattern="[A-Za-z]+" required value="<%= locals.inv_make %>">
@@ -35,10 +35,10 @@
             <!-- <textarea name="inv_description" id="inv_description" rows="3" required value="<%# locals.inv_description %>"></textarea> -->
 
             <label for="inv_image">Image path*</label>
-            <input type="text" name="inv_image" id="inv_image" value="public/images/vehicles/no-image.png" required >
+            <input type="text" name="inv_image" id="inv_image" value="images/vehicles/no-image.png" required >
 
             <label for="inv_thumbnail">Thumbnail path*</label>
-            <input type="text" name="inv_thumbnail" id="inv_thumbnail" value="public/images/vehicles/no-image-tn.png" required >
+            <input type="text" name="inv_thumbnail" id="inv_thumbnail" value="images/vehicles/no-image-tn.png" required >
 
             <label for="inv_price">Price*</label>
             <!-- <input type="number" name="inv_price" id="inv_price" title="Numbers only" pattern="[0-9]+" required value="<%= locals.inv_price %>"> -->

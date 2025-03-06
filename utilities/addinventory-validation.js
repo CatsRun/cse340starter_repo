@@ -90,12 +90,13 @@ validate.checkRegData = async (req, res, next) => {
     let errors = []
     errors = validationResult(req)
     if (!errors.isEmpty()) {
+      let classificationList = await utilities.buildClassificationList()
       let nav = await utilities.getNav()
       res.render("inventory/addinventory", {
         errors,
         title: "Add New Vehicle",
         nav,
-        inv_make,  inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color,
+        inv_make,  inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classificationList,
       })
       return
     }

@@ -10,11 +10,12 @@ const regValidate = require('../utilities/account-validation')
 // gives access to utilities > index file.
 const utilities = require("../utilities/")
 
+// https://blainerobertson.github.io/340-js/views/login.html
+
+router.get("/accountmanagement", utilities.handleErrors(accountController.buildAccountManagement)) //is this how to:Add the new default route for accounts to the accountRoute file.
+
 // Route to build login view
 router.get("/login", utilities.handleErrors(accountController.buildLogin))
-// router.get("/login", (accountController.buildLogin))
-
-// ", utilities.handleErrors" This is the error handling middle ware. 
 
 // Route to build registration view
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
@@ -37,12 +38,21 @@ router.post(
 
 
 //   testing validation temp  https://blainerobertson.github.io/340-js/views/stickiness.html
-// Process the login attempt
-router.post(
-    "/login",
-    (req, res) => {
-      res.status(200).send('login process')
-    }
-  )
 
+// Process the login attempt, this is temp while testing
+// router.post(
+//     "/login",
+//     (req, res) => {
+//       res.status(200).send('login process')
+//     }
+//   )
+
+// https://blainerobertson.github.io/340-js/views/login.html
+// Process the login request
+router.post(
+  "/login",
+  regValidate.loginRules(),
+  regValidate.checkLoginData,
+  utilities.handleErrors(accountController.accountLogin)
+)
 module.exports = router;
