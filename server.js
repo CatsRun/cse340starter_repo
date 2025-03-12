@@ -26,6 +26,7 @@ const pool = require('./database/')
 
 // added wk04 THIS CRASHED THE TERMINAL**********************
 const utilities = require("./utilities/")
+// const utilities = require("../utilities/")  //this is how it shows in the assignment but it breaks the code to have two '..'  https://byui-cse.github.io/cse340-ww-content/views/login.html
 
 // https://blainerobertson.github.io/340-js/views/account-process-register.html
 const bodyParser = require("body-parser")
@@ -34,10 +35,13 @@ const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
 
 
-// wk06 https://blainerobertson.github.io/340-js/views/session-message.html
+
+
 /* ***********************
  * Middleware
  * ************************/
+
+// wk06 https://blainerobertson.github.io/340-js/views/session-message.html
 app.use(session({
   store: new (require('connect-pg-simple')(session))({
     createTableIfMissing: true,
@@ -49,16 +53,33 @@ app.use(session({
   name: 'sessionId',
 }))
 
-// Express Messages Middleware
+// *********  Express Messages Middleware  ***********
 app.use(require('connect-flash')())
 app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res)
   next()
 })
 
+ 
+// *** these must be above Routes ***
 // https://blainerobertson.github.io/340-js/views/account-process-register.html
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
+// https://blainerobertson.github.io/340-js/views/login.html
+app.use(cookieParser())
+
+// ***          ***             ***
+
+
+
+//* *********************
+//* utilities index JWT 
+//* *********************
+//https://byui-cse.github.io/cse340-ww-content/views/login.html
+app.use(utilities.checkJWTToken)
+
+
 
 
 /* ***********************
@@ -126,18 +147,12 @@ app.use(async (req, res, next) => {
 
 
 
-// https://blainerobertson.github.io/340-js/views/login.html
-app.use(cookieParser())
-
 /* ***********************
 * Express Error Handler
 * Place after all other middleware
 * This allows 404 page not found and other error messages
 * wk04 https://blainerobertson.github.io/340-js/views/basic-errors.htmlz
 *************************/
-// const invModel = require("../models/inventory-model")
-// is this right?
-// const utilities = require("./utilities/index.js")
 
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
