@@ -152,20 +152,6 @@ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)
 
 
 
-//  https://byui-cse.github.io/cse340-ww-content/views/jwt-authorize.html
- /* ****************************************
- *  Check Login
- * ************************************ */
- Util.checkLogin = (req, res, next) => {
-  if (res.locals.loggedin) {
-    next()
-  } else {
-    req.flash("notice", "Please log in.--chweck")
-    return res.redirect("/account/login")
-  }
- }
-
- 
 
 /* ****************************************
 * Middleware to check token validity
@@ -191,6 +177,20 @@ Util.checkJWTToken = (req, res, next) => {
  }
 
 
+
+
+//  https://byui-cse.github.io/cse340-ww-content/views/jwt-authorize.html
+ /* ****************************************
+ *  Check Login
+ * ************************************ */
+ Util.checkLogin = (req, res, next) => {
+  if (res.locals.loggedin) {
+    next()
+  } else {
+    req.flash("notice", "Please log in.--chweck")
+    return res.redirect("/account/login")
+  }
+ }
 
 
  

@@ -30,7 +30,7 @@ async function getInventoryByClassificationId(classification_id) {
 // wk05 assignment https://byui-cse.github.io/cse340-ww-content/assignments/assign3.html
 // a function to retrieve the data for a specific vehicle in inventory, based on the inventory id (this should be a single function, not a separate one for each vehicle), which is part of the inventory-model,
 async function getInventoryByInventoryId(inventory_id) {
-  console.log(inventory_id + "look here")
+  // console.log(inventory_id + "look here")
   try {
     const data = await pool.query(
     `SELECT * FROM public.inventory
@@ -69,7 +69,7 @@ async function addClassification(classification_name){
 async function addInventory(
   classification_id, inv_make,  inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color
 )
-{console.log("Look here:  " + classification_id, inv_make,  inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color)
+{
   try {
     const sql = "INSERT INTO inventory (classification_id,inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color) VALUES ($1, $2, $3, $4,$5, $6, $7, $8, $9, $10) RETURNING *"
     return await pool.query(sql, [classification_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color])

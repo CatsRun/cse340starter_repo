@@ -56,10 +56,14 @@ invCont.buildByInventoryId = async function (req, res, next) {
 invCont.buildManagement = async function (req, res, next)
   {
     let nav = await utilities.getNav()
+
+    const classificationList = await utilities.buildClassificationList()  //https://byui-cse.github.io/cse340-ww-content/views/select-products-ajax.html
     res.render("./inventory/management", {
       title: "Vehicle " + "Management",
       nav,
       errors: null,
+      // classificationSelect,
+      classificationList,
     })
   }
 
