@@ -1,0 +1,67 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>    
+
+<%- messages() %>
+
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+
+<div class="form">
+    <form action="/inv/update" method="post"></form>
+    <!-- <form id="edit-inventory" action="/inv/edit-inventory" method="post"> -->
+        <!--  why is this actino different than the file name? I thought it should reference its self. -->
+        <fieldset>
+            <%- classificationList %> 
+
+            <!-- <label for="classification_name">Classification*</label>
+            <input type="text" name="classification_name" id="classification_name" pattern="[A-Za-z]+" required value="<%= locals.inv_make %>"> -->
+                        
+            <label for="inv_make">Make*</label>
+            <input type="text" name="inv_make" id="inv_make" pattern="[A-Za-z]+" required value="<%= locals.inv_make %>">
+            
+            <label for="inv_model">Model*</label>
+            <input type="text" name="inv_model" id="inv_model" pattern="[A-Za-z0-9 \-]+" required value="<%= locals.inv_model %>">
+            
+            <label for="inv_year">Year*</label>
+            <input type="text" name="inv_year" id="inv_year" title="4 digit year" pattern="[0-9]{4}" required value="<%= locals.inv_year %>">
+
+            <label for="inv_description">Description*</label>
+            <input name="inv_description" id="inv_description" required value="<%= locals.inv_description %>">
+
+            <!-- <textarea name="inv_description" id="inv_description" rows="3" required value="<%# locals.inv_description %>"></textarea> -->
+
+            <label for="inv_image">Image path*</label>
+            <input type="text" name="inv_image" id="inv_image" value="images/vehicles/no-image.png" required >
+
+            <label for="inv_thumbnail">Thumbnail path*</label>
+            <input type="text" name="inv_thumbnail" id="inv_thumbnail" value="images/vehicles/no-image-tn.png" required >
+
+            <label for="inv_price">Price*</label>
+            <!-- <input type="number" name="inv_price" id="inv_price" title="Numbers only" pattern="[0-9]+" required value="<%= locals.inv_price %>"> -->
+            <input type="number" name="inv_price" id="inv_price" title="Numbers only" required value="<%= locals.inv_price %>">
+
+            <label for="inv_miles">Miles*</label>
+            <!-- <input type="number" name="inv_miles" id="inv_miles" title="Numbers only" pattern="[0-9]+" required value="<%= locals.inv_miles %>"> -->
+            <input type="number" name="inv_miles" id="inv_miles" title="Numbers only" required value="<%= locals.inv_miles %>">
+
+            <label for="inv_color">Color*</label>
+            <input type="text" name="inv_color" id="inv_color" pattern="[A-Za-z0-9 ]+" required value="<%= locals.inv_color %>">
+            
+            <div><i> * Required field</i></div>
+            
+        </fieldset>
+        
+        <button type="submit">Update Vehicle</button>
+        <!-- <input type="submit" name="submit" value="Update Vehicle"> either one works -->
+        
+    </form>
+
+</div>

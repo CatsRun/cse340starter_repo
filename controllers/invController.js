@@ -99,6 +99,7 @@ invCont.buildAddInventory = async function (req, res, next)
     classificationList,
     classification_id,
     errors: null,
+    
   })
 }
 
@@ -135,12 +136,12 @@ invCont.addClassification = async function (req, res, next)
       `It worked! ${classification_name} was added to the navigation bar.`
     )
 
-    // res.redirect("./inventory/management", {   //this uses .redirect instead of rebuilding the page with .render
-    res.status(201).render("./inventory/management", {
-      title: "Vehicle Management",
-      nav, //why is this nav bar not refreshing when the item is
-      errors: null,
-    })
+    res.redirect("/inv/"    //this uses .redirect instead of rebuilding the page with .render
+    // res.status(201).render("./inventory/management", {
+    //   title: "Vehicle Management",
+    //   nav, //why is this nav bar not refreshing when the item is
+    //   errors: null,
+    )
 
   } else {
     req.flash("notice", "Sorry, it failed.")
@@ -154,7 +155,6 @@ invCont.addClassification = async function (req, res, next)
 }
 
 
-// addInventory
 // ******************************************
 // *          add new Inventory 
 // ****************************************** 
@@ -206,6 +206,55 @@ invCont.addInventory = async function (req, res, next)
 }
 
 
+/* ***************************
+ *  Return Inventory by Classification As JSON
+ * ************************** */
+invCont.getInventoryJSON = async (req, res, next) => {
+  const classification_id = parseInt(req.params.classification_id)
+  const invData = await invModel.getInventoryByClassificationId(classification_id)
+  if (invData[0].inv_id) {
+    return res.json(invData)
+  } else {
+    next(new Error("No data returned"))
+  }
+}
+
+
+// ******************************************
+// *          Build Inventory Edit View
+// ****************************************** 
+// https://byui-cse.github.io/cse340-ww-content/views/update-one.html
+invCont.editInventoryView = async function (req, res, next)
+{
+  const inventory_id = (req.params.inventory_id)
+  console.log(inventory_id +"look here")
+  let nav = await utilities.getNav()
+  // const itemData = await invModel.getInventoryByInventoryId(inventory_id)
+
+  const data = await invModel.getInventoryByInventoryId(inventory_id)
+  const itemData = data[0]
+  const classificationList = await utilities.buildClassificationList(itemData.classification_id)  
+  // console.log(itemData.inv_make)
+  const itemName = `${itemData.inv_make} ${itemData.inv_model}`
+  res.render("./inventory/edit-inventory", {
+    title: "Edit " + itemName,
+    nav,
+    classificationList: classificationList,
+    errors: null,
+    inv_id: itemData.inv_id,
+    inv_make: itemData.inv_make,
+    inv_model: itemData.inv_model,
+    inv_year: itemData.inv_year,
+    inv_description: itemData.inv_description,
+    inv_image: itemData.inv_image,
+    inv_thumbnail: itemData.inv_thumbnail,
+    inv_price: itemData.inv_price,
+    inv_miles: itemData.inv_miles,
+    inv_color: itemData.inv_color,
+    classification_id: itemData.classification_id,
+    
+  })
+}
 
 
   module.exports = invCont

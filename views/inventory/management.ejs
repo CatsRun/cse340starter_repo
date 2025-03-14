@@ -6,15 +6,16 @@
 
 <%- messages() %>
 
-<a href="./newclassification">Add New Classification</a> 
+<a href="inv/newclassification">Add New Classification</a> 
 
-<a href="./addinventory">Add New Vehicle</a>
+<a href="inv/addinventory">Add New Vehicle</a>
 
 <h2>Manage Inventory</h2>
 
 <p>Please select a classification from the list. it will show you the  items belonging to the classification. </p>
 
 <%- classificationList %>
+<!-- why does this break the other pages?  -->
 
 <!-- create an empty HTML table. It is within this table that inventory items returned from the controller will be displayed https://byui-cse.github.io/cse340-ww-content/views/select-products-ajax.html  -->
 <table id="inventoryDisplay"></table>

@@ -31,6 +31,12 @@ router.get("/newclassification", utilities.handleErrors(invController.buildNewCl
 // https://byui-cse.github.io/cse340-ww-content/assignments/assign4.html
 router.get("/addinventory", utilities.handleErrors(invController.buildAddInventory));
 
+// https://byui-cse.github.io/cse340-ww-content/views/select-products-ajax.html
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
+// https://byui-cse.github.io/cse340-ww-content/views/update-one.html
+router.get("/edit/:inventory_id", utilities.handleErrors(invController.editInventoryView))
+
 
 
 // ********************
