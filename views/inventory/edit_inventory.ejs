@@ -15,9 +15,9 @@
   <% } %>
 
 <div class="form">
-    <form action="/inv/update" method="post"></form>
-    <!-- <form id="edit-inventory" action="/inv/edit-inventory" method="post"> -->
-        <!--  why is this actino different than the file name? I thought it should reference its self. -->
+    <form action="/inv/update" method="post" id="updateForm">
+    <!-- <form id="edit_inventory" action="/inv/edit_inventory" method="post"> -->
+        <!--  why is this action different than the file name? I thought it should reference its self. -->
         <fieldset>
             <%- classificationList %> 
 
@@ -39,10 +39,10 @@
             <!-- <textarea name="inv_description" id="inv_description" rows="3" required value="<%# locals.inv_description %>"></textarea> -->
 
             <label for="inv_image">Image path*</label>
-            <input type="text" name="inv_image" id="inv_image" value="images/vehicles/no-image.png" required >
+            <input type="text" name="inv_image" id="inv_image" required value="<%= locals.inv_image %>" >
 
             <label for="inv_thumbnail">Thumbnail path*</label>
-            <input type="text" name="inv_thumbnail" id="inv_thumbnail" value="images/vehicles/no-image-tn.png" required >
+            <input type="text" name="inv_thumbnail" id="inv_thumbnail" required value="<%= locals.inv_thumbnail %>">
 
             <label for="inv_price">Price*</label>
             <!-- <input type="number" name="inv_price" id="inv_price" title="Numbers only" pattern="[0-9]+" required value="<%= locals.inv_price %>"> -->
@@ -55,13 +55,20 @@
             <label for="inv_color">Color*</label>
             <input type="text" name="inv_color" id="inv_color" pattern="[A-Za-z0-9 ]+" required value="<%= locals.inv_color %>">
             
-            <div><i> * Required field</i></div>
-            
+            <div><i> * Required field</i></div>       
+        
+            <button type="submit" name="submit" disabled>Update Vehicle</button>
+            <!-- either one works -->
+
+            <!-- <input type="submit" name="submit" value="Update Vehicle" disabled>  -->
+            <!-- https://byui-cse.github.io/cse340-ww-content/views/update-two.html -->
+            <input type="hidden" name="inv_id"
+            <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+            <% } %>>
+
         </fieldset>
-        
-        <button type="submit">Update Vehicle</button>
-        <!-- <input type="submit" name="submit" value="Update Vehicle"> either one works -->
-        
     </form>
 
-</div>
+</div>    
+
+<script src="/js/inv_update.js"></script>

@@ -112,18 +112,6 @@ invCont.addClassification = async function (req, res, next)
   
   const { classification_name } = req.body
 
-  // try {
-  //   // regular password and cost (salt is generated automatically)
-  //   hashedPassword = await bcrypt.hashSync(account_password, 10)
-  // } catch (error) {
-  //   req.flash("notice", 'Sorry, there was an error processing the request.')
-  //   res.status(500).render("./inventory/newclassification", {
-  //     title: "Add New Classification",
-  //     nav,
-  //     errors: null,
-  //   })
-  // }
-
   const regResult = await invModel.addClassification(
     classification_name
   )
@@ -163,18 +151,6 @@ invCont.addInventory = async function (req, res, next)
   let nav = await utilities.getNav()
   const { classification_id, inv_make,  inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color } = req.body
 
-  // try {
-  //   // regular password and cost (salt is generated automatically)
-  //   hashedPassword = await bcrypt.hashSync(account_password, 10)
-  // } catch (error) {
-  //   req.flash("notice", 'Sorry, there was an error processing the request.')
-  //   res.status(500).render("./inventory/newclassification", {
-  //     title: "Add New Classification",
-  //     nav,
-  //     errors: null,
-  //   })
-  // }
-
   const regResult = await invModel.addInventory(
     classification_id, inv_make,  inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color
     
@@ -186,13 +162,14 @@ invCont.addInventory = async function (req, res, next)
       `It worked! Your vehicle was added.`
       // `It worked! ${inv_year, inv_make, inv_model} was added.`
     )
-
+    res.redirect("/inv/" 
     // res.redirect("./inventory/management", {   //this uses .redirect instead of rebuilding the page with .render
-    res.status(201).render("./inventory/management", {
-      title: "Vehicle Management",
-      nav, //why is this nav bar not refreshing when the item is
-      errors: null,
-    })
+    // res.status(201).render("./inventory/management", {
+      // title: "Vehicle Management",
+      // nav, //why is this nav bar not refreshing when the item is
+      // errors: null,
+    // }
+  )
 
   } else {
     req.flash("notice", "Sorry, it failed.")
@@ -227,7 +204,7 @@ invCont.getInventoryJSON = async (req, res, next) => {
 invCont.editInventoryView = async function (req, res, next)
 {
   const inventory_id = (req.params.inventory_id)
-  console.log(inventory_id +"look here")
+  // console.log(inventory_id +"look here")
   let nav = await utilities.getNav()
   // const itemData = await invModel.getInventoryByInventoryId(inventory_id)
 
@@ -236,7 +213,7 @@ invCont.editInventoryView = async function (req, res, next)
   const classificationList = await utilities.buildClassificationList(itemData.classification_id)  
   // console.log(itemData.inv_make)
   const itemName = `${itemData.inv_make} ${itemData.inv_model}`
-  res.render("./inventory/edit-inventory", {
+  res.render("./inventory/edit_inventory", {
     title: "Edit " + itemName,
     nav,
     classificationList: classificationList,
@@ -254,6 +231,76 @@ invCont.editInventoryView = async function (req, res, next)
     classification_id: itemData.classification_id,
     
   })
+}
+
+
+// ******************************************
+// *          Update new Inventory 
+// ****************************************** 
+invCont.updateInventory = async function (req, res, next)
+{
+  let nav = await utilities.getNav()
+  const { 
+    
+    inv_make,  
+    inv_model, 
+    inv_year, 
+    inv_description, 
+    inv_image, 
+    inv_thumbnail, 
+    inv_price, 
+    inv_miles, 
+    inv_color,
+    inv_id, 
+    classification_id, 
+
+  } = req.body
+
+  const updateResult  = await invModel.updateInventory(
+     
+    inv_make,  
+    inv_model, 
+    inv_year, 
+    inv_description, 
+    inv_image, 
+    inv_thumbnail, 
+    inv_price, 
+    inv_miles, 
+    inv_color,
+    inv_id, 
+    classification_id,
+    
+
+  )
+  if (updateResult) {
+    const itemName = updateResult.inv_make + " " + updateResult.inv_model
+    req.flash("notice", `The ${itemName} was successfully updated.`)
+    res.redirect("/inv/")
+    
+  } else {   
+    // const classificationList   = await utilities.buildClassificationList(itemData.classification_id)  
+    const classificationList = await utilities.buildClassificationList(classification_id)
+    const itemName = `${inv_make} ${inv_model}`
+    
+    req.flash("notice", "Sorry, the insert failed.")
+    res.status(501).render("inventory/edit_inventory", {
+    title: "Edit " + itemName,
+    nav,
+    classificationList: classificationList,
+    errors: null,
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id,
+    })
+  }
 }
 
 

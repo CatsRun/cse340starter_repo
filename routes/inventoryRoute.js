@@ -37,8 +37,6 @@ router.get("/getInventory/:classification_id", utilities.handleErrors(invControl
 // https://byui-cse.github.io/cse340-ww-content/views/update-one.html
 router.get("/edit/:inventory_id", utilities.handleErrors(invController.editInventoryView))
 
-
-
 // ********************
 // ******* post *******
 // ********************
@@ -60,9 +58,21 @@ router.post(
     utilities.handleErrors(invController.addInventory)
   )
 
+router.post(
+  "/edit_inventory",
+  regValidate.newInventoryRules(),
+  regValidate.checkUpdateData,
+  // utilities.handleErrors(invController.edit_inventory)
+  utilities.handleErrors(invController.editInventoryView)
+)
 
 
+// https://byui-cse.github.io/cse340-ww-content/views/update-two.html
+// update inventory when form is submitted
+router.post("/update/", utilities.handleErrors(invController.updateInventory))
+// router.post("/edit_inventory/", utilities.handleErrors(invController.updateInventory))
 
+// 
 module.exports = router;
 
 
