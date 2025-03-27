@@ -1,0 +1,50 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>    
+
+<%- messages() %>
+
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+
+<div class="form">
+    <form action="/inv/delete" method="post" id="invDeleteForm">
+    <!-- <form id="edit_inventory" action="/inv/edit_inventory" method="post"> -->
+        <!--  why is this action different than the file name? I thought it should reference its self. -->
+        <fieldset> 
+           
+            <label for="inv_make">Make</label>
+            <input type="text" name="inv_make" id="inv_make"  readonly <% if (locals.inv_make) { %> value="<%= locals.inv_make %>">
+            <% } %>
+            
+            <label for="inv_model">Model</label>
+            <input type="text" name="inv_model" id="inv_model" readonly <% if (locals.inv_model) { %> value="<%= locals.inv_model %>">
+            <% } %>
+            
+            <label for="inv_year">Year</label>
+            <input type="text" name="inv_year" id="inv_year" title="4 digit year" readonly <% if (locals.inv_year) { %> value="<%= locals.inv_year %>">
+            <% } %>
+
+            <label for="inv_price">Price</label>
+            <input type="number" name="inv_price" id="inv_price" title="Numbers only" readonly <% if (locals.inv_price) { %> value="<%= locals.inv_price %>"
+            <% } %>>
+
+            <div><i> This will permanently this item frmo the inventory. <br> Are you sure you want to delete this vehicle?</i></div>       
+        
+            <button type="submit" name="submit" >Delete Vehicle</button>
+
+            <input type="hidden" name="inv_id"
+            <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+            <% } %>>
+
+        </fieldset>
+    </form>
+
+</div>    

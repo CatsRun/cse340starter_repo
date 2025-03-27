@@ -124,10 +124,10 @@ invCont.addClassification = async function (req, res, next)
       `It worked! ${classification_name} was added to the navigation bar.`
     )
 
-    res.redirect("/inv/"    //this uses .redirect instead of rebuilding the page with .render
+    res.redirect("/inv/"    //this uses .redirect instead of rebuilding the page insted of .render
     // res.status(201).render("./inventory/management", {
     //   title: "Vehicle Management",
-    //   nav, //why is this nav bar not refreshing when the item is
+    //   nav, //why is this nav bar not refreshing when the item does
     //   errors: null,
     )
 
@@ -155,7 +155,7 @@ invCont.addInventory = async function (req, res, next)
     classification_id, inv_make,  inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color
     
   )
-    console.log(classification_id)
+    // console.log(classification_id)kkjn m   b t70=
   if (regResult) {
     req.flash(
       "notice",
@@ -202,9 +202,8 @@ invCont.getInventoryJSON = async (req, res, next) => {
 // ****************************************** 
 // https://byui-cse.github.io/cse340-ww-content/views/update-one.html
 invCont.editInventoryView = async function (req, res, next)
-{
-  const inventory_id = (req.params.inventory_id)
-  // console.log(inventory_id +"look here")
+{  
+  const inventory_id = (req.params.inventory_id) 
   let nav = await utilities.getNav()
   // const itemData = await invModel.getInventoryByInventoryId(inventory_id)
 
@@ -213,6 +212,17 @@ invCont.editInventoryView = async function (req, res, next)
   const classificationList = await utilities.buildClassificationList(itemData.classification_id)  
   // console.log(itemData.inv_make)
   const itemName = `${itemData.inv_make} ${itemData.inv_model}`
+// -----------above is original 5.0
+  // const inventory_id = parseInt(req.params.inventory_id) //parse int was added test 5.0
+ 
+  // let nav = await utilities.getNav()
+  // const itemData = await invModel.getInventoryByInventoryId(inventory_id)
+  // const classificationList = await utilities.buildClassificationList(itemData.classification_id)  
+  // const itemName = `${itemData.inv_make} ${itemData.inv_model}`
+  
+
+
+
   res.render("./inventory/edit_inventory", {
     title: "Edit " + itemName,
     nav,
@@ -239,6 +249,7 @@ invCont.editInventoryView = async function (req, res, next)
 // ****************************************** 
 invCont.updateInventory = async function (req, res, next)
 {
+  // const inventory_id = (req.body.inventory_id) //try adding this to see if it workds to update the site after and update?
   let nav = await utilities.getNav()
   const { 
     
@@ -251,8 +262,8 @@ invCont.updateInventory = async function (req, res, next)
     inv_price, 
     inv_miles, 
     inv_color,
-    inv_id, 
     classification_id, 
+    inv_id,
 
   } = req.body
 
@@ -267,9 +278,8 @@ invCont.updateInventory = async function (req, res, next)
     inv_price, 
     inv_miles, 
     inv_color,
-    inv_id, 
     classification_id,
-    
+    inv_id, 
 
   )
   if (updateResult) {
@@ -303,5 +313,57 @@ invCont.updateInventory = async function (req, res, next)
   }
 }
 
+
+// ******************************************
+// *          Delete Inventory Confirmation View
+// ****************************************** 
+// https://byui-cse.github.io/cse340-ww-content/views/delete.html
+invCont.deleteInventoryView = async function (req, res, next)
+{
+  const inv_id = (req.params.inv_id)
+  let nav = await utilities.getNav()
+  const data = await invModel.getInventoryByInventoryId(inv_id)
+  const itemData = data[0]
+  const itemName = `${itemData.inv_make} ${itemData.inv_model}`
+
+  res.render("./inventory/delete-inventory", {
+    title: "Delete " + itemName,
+    nav,
+    errors: null,
+    inv_id: itemData.inv_id,
+    inv_make: itemData.inv_make,
+    inv_model: itemData.inv_model,
+    inv_year: itemData.inv_year,
+    inv_price: itemData.inv_price,
+    
+  })
+}
+
+
+// ******************************************
+// *          Delete Inventory 
+// ******************************************
+// https://byui-cse.github.io/cse340-ww-content/views/delete.html
+invCont.deleteInventoryItem = async function (req, res, next)
+{
+  let nav = await utilities.getNav()
+  const inv_id = (req.body.inv_id)
+  console.log(inv_id + " invController")
+  const deleteResult = await invModel.deleteInventoryItem(inv_id)
+
+// ------------test 5.0
+// const inventory_id = (req.params.inv_id)
+// const data = await invModel.getInventoryByInventoryId(inventory_id)
+// const itemData = data[0]
+
+  if (deleteResult) {
+    req.flash("notice", `The item was successfully deleted.`)
+    res.redirect("/inv/")
+
+  } else {   
+    req.flash("notice", "Sorry, the deletion failed.")
+    res.redirect("/inv/delete/"+ inv_id)    //this uses .redirect instead of rebuilding the page with .render
+  }  
+}
 
   module.exports = invCont

@@ -37,6 +37,14 @@ router.get("/getInventory/:classification_id", utilities.handleErrors(invControl
 // https://byui-cse.github.io/cse340-ww-content/views/update-one.html
 router.get("/edit/:inventory_id", utilities.handleErrors(invController.editInventoryView))
 
+// 
+//   "/delete_inventory",
+  // regValidate.deleteInventoryRule(),
+  // regValidate.checkDeleteData,
+  // utilities.handleErrors(invController.deleteInventoryView)
+router.get("/delete/:inv_id", utilities.handleErrors(invController.deleteInventoryView))
+
+
 // ********************
 // ******* post *******
 // ********************
@@ -62,17 +70,26 @@ router.post(
   "/edit_inventory",
   regValidate.newInventoryRules(),
   regValidate.checkUpdateData,
-  // utilities.handleErrors(invController.edit_inventory)
   utilities.handleErrors(invController.editInventoryView)
 )
 
 
 // https://byui-cse.github.io/cse340-ww-content/views/update-two.html
 // update inventory when form is submitted
-router.post("/update/", utilities.handleErrors(invController.updateInventory))
+router.post("/update/", 
+  // add error handling here
+  utilities.handleErrors(invController.updateInventory))
 // router.post("/edit_inventory/", utilities.handleErrors(invController.updateInventory))
 
-// 
+// * ****Delete post**** *
+// https://byui-cse.github.io/cse340-ww-content/views/delete.html
+router.post(
+  "/delete",
+  utilities.handleErrors(invController.deleteInventoryItem)
+)
+
+
+
 module.exports = router;
 
 
