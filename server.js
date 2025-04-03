@@ -80,8 +80,6 @@ app.use(cookieParser())
 app.use(utilities.checkJWTToken)
 
 
-
-
 /* ***********************
  * View Engine and Templates
  *************************/

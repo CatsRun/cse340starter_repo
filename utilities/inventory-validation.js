@@ -39,4 +39,10 @@ validate.checkRegData = async (req, res, next) => {
     next()
   }
   
+
+
+
+
+
+  // build here middlewaer 
   module.exports = validate

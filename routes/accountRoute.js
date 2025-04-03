@@ -11,7 +11,6 @@ const regValidate = require('../utilities/account-validation')
 const utilities = require("../utilities/")
 
 
-// ?????????????this is suppose to be "/" but I have /accountmanagement, how do I fix this throuought the program?
 // https://blainerobertson.github.io/340-js/views/login.html
 
 // router.get("/management", utilities.checkLogin, utilities.handleErrors(accountController.buildManagement)) //is this how to:Add the new default route for accounts to the accountRoute file.
@@ -28,11 +27,14 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin))
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
 // router.get("/register", (accountController.buildRegister))
 
+// account-update view    utilities.handleErrors
+// router.get("/account/update:account_id", (accountController.buildAccountUpdate));
+router.get("/update", utilities.handleErrors(accountController.buildAccountUpdate));
+
 
 // ********************
 // ******* post *******
 // ********************
-// router.post('/register', utilities.handleErrors(accountController.registerAccount))
 
 // Process the registration data
 // https://blainerobertson.github.io/340-js/views/server-validation.html
@@ -61,5 +63,49 @@ router.post(
   regValidate.loginRules(),
   regValidate.checkLoginData,
   utilities.handleErrors(accountController.accountLogin)
+        // console.log(locals.account_type + 'local account type')
+      
+      // console.log(account_type + 'local fiest name')
+      // console.log(account_type + 'local last name')
 )
+
+
+
+ //Route for destroying cookie which is logout
+//  reference: https://www.geeksforgeeks.org/http-cookies-in-node-js/?ref=lbp
+ router.get('/logout', (req, res)=>{ 
+  //it will clear the userData cookie 
+  res.clearCookie('jwt')
+  res.redirect("/account/login")
+  })
+
+
+// account-update view    
+router.post(
+  "/update/", 
+  
+  regValidate.updateAccountRules(),
+  regValidate.checkAccntUpdateData,
+  utilities.handleErrors(accountController.updateAccount));
+
+
+  // ------------this needs work---------------- //
+  // account-update view    
+router.post(
+  "/resetpassword", 
+  regValidate.passwordUpdateRules(),
+  // regValidate.checkAccntUpdateData,
+  utilities.handleErrors(accountController.passwordUpdateAccount));
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = router;

@@ -6,7 +6,29 @@
 
 <%- messages() %>
 
+
 <!-- all errors could be displayed https://blainerobertson.github.io/340-js/views/server-validation.html -->
+<p>You're logged in</p> 
+<!-- ///////////////////// -->
+
+
+<% if (accountData.account_type === "Client") { %>
+  <h2>Welcome <%= accountData.account_firstname %></h2>
+
+  <p>  <a href="update">Update account information</a>    </p> <!-- Task 3: change this link to pass through the accounts router and be handled by the accounts controller. The id of the logged-in client should be passed through the link.  -->
+   <% } else { %>
+     
+     <h2>Welcome <%= accountData.account_firstname %></h2>
+    
+     <p>  <a href="update">Update account information</a>    </p>
+      <h3>Inventory Management</h3>
+      <p>  <a href="/inv/">Inventory Management</a>    </p>
+  <%
+  } %>
+
+  
+
+
 <% if (errors) { %>
     <ul class="notice">
    <% errors.array().forEach(error => { %>
@@ -14,5 +36,14 @@
   <%  }) %>
    </ul>
   <% } %>
+<!-- ***************** -->
+  
 
-  <p>You're logged in</p>
+  <%# accountData.account_type %>
+<%# console.log(accountData.account_type) %>
+
+<!-- <script>
+  // console.log(accountData.account_firstname + " test 2 account data")
+  console.log(newAccountData.account_firstname + " test 2 new data ")
+
+</script> -->

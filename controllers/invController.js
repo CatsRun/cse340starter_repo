@@ -56,7 +56,7 @@ invCont.buildByInventoryId = async function (req, res, next) {
 invCont.buildManagement = async function (req, res, next)
   {
     let nav = await utilities.getNav()
-
+    // const authUserAccess = accountController.authUserAccess
     const classificationList = await utilities.buildClassificationList()  //https://byui-cse.github.io/cse340-ww-content/views/select-products-ajax.html
     res.render("./inventory/management", {
       title: "Vehicle " + "Management",
@@ -64,6 +64,7 @@ invCont.buildManagement = async function (req, res, next)
       errors: null,
       // classificationSelect,
       classificationList,
+      // authUserAccess
     })
   }
 
@@ -92,7 +93,7 @@ invCont.buildAddInventory = async function (req, res, next)
 {
   let nav = await utilities.getNav()
   let classificationList = await utilities.buildClassificationList()
-  const classification_id = req.params. classificationId
+  const classification_id = req.params.classificationId
   res.render("./inventory/addinventory", {
     title: "Add New Vehicle",
     nav,
@@ -350,11 +351,6 @@ invCont.deleteInventoryItem = async function (req, res, next)
   const inv_id = (req.body.inv_id)
   console.log(inv_id + " invController")
   const deleteResult = await invModel.deleteInventoryItem(inv_id)
-
-// ------------test 5.0
-// const inventory_id = (req.params.inv_id)
-// const data = await invModel.getInventoryByInventoryId(inventory_id)
-// const itemData = data[0]
 
   if (deleteResult) {
     req.flash("notice", `The item was successfully deleted.`)

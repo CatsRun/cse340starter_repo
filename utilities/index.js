@@ -176,9 +176,26 @@ Util.checkJWTToken = (req, res, next) => {
   }
  }
 
+  /* ******************************
+  * Check Login admin or 
+  * ***************************** */
+  Util.checkAuthData = async (req, res, next) => {
+    const { account_type } = res.locals.accountData
+    // res.locals.accountData //use this
+    let nav = await Util.getNav()
+    if (account_type === "Client") {
+      req.flash("notice", "Please check your credentials and try again.")
+      res.render("account/login", {
+            title: "Login",
+            errors:null,
+            nav,
+          })
+    } 
+      next()
+  }
 
 
-
+  
 //  https://byui-cse.github.io/cse340-ww-content/views/jwt-authorize.html
  /* ****************************************
  *  Check Login
@@ -187,14 +204,24 @@ Util.checkJWTToken = (req, res, next) => {
   if (res.locals.loggedin) {
     next()
   } else {
-    req.flash("notice", "Please log in.--chweck")
+    req.flash("notice", "Please log in.")
     return res.redirect("/account/login")
   }
  }
 
 
- 
-
-
+ /* ****************************************
+ *  Check Authorization 
+ used for employee or admin in the inventory administrative views or processes that add/edit/delete items
+ * ************************************ */
+//  Util.checkAuth = (req, res, next) => {
+//   // if (authUserAccess()) { //fix this to check for emplyee or admin    
+//   if (res.locals.authenticated) { //fix this to check for emplyee or admin
+//     next()
+//   } else {
+//     req.flash("notice", "Restricted Page")
+//     return res.redirect("/account/login")
+//   }
+//  }
 
 module.exports = Util
