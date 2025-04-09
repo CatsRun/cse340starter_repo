@@ -161,5 +161,37 @@ async function deleteInventoryItem(
 }
 
 
+/* ***************************
+ *  Review Inventory Item
+ *  final project
+ * ************************** */
+async function reviewItem(
+  review_text,
+  // review_date,
+  inv_id,
+  account_id,
+) {
+  
+  const review_date = new Date()
+  try {
+    const sql =
+
+      "INSERT INTO public.review ( review_text, review_date, inv_id, account_id ) VALUES ($1, $2, $3, $4 ) RETURNING *"
+
+
+  return await pool.query(sql, [
+  review_text,
+  review_date,
+  inv_id,
+  account_id,
+])
+  } catch (error) {
+    console.error("model error: " + error)
+  }
+}
+
+
+
+
 // module.exports = {getClassifications}
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByInventoryId, addClassification, addInventory, updateInventory, deleteInventoryItem};
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByInventoryId, addClassification, addInventory, updateInventory, deleteInventoryItem, reviewItem};

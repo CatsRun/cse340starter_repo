@@ -100,7 +100,7 @@ async function updateAccount(req, res) {
     console.log(account_firstname + "  test 6 does cont update accnt work?")
     req.flash(
       "notice",
-      `Congratulations ${account_firstname}, you have updated  account. `
+      `Congratulations ${account_firstname}, you have updated your account. `
     )
     console.log(account_firstname + "  test 7 does cont update accnt work?")
     // res.redirect("account/account-management")

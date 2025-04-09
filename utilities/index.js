@@ -224,4 +224,13 @@ Util.checkJWTToken = (req, res, next) => {
 //   }
 //  }
 
+ /* ****************************************
+ *      Populate Review Inventory Item
+ *      final project
+ * ************************************ */
+// Util.buildReview = async function(data) {
+
+// }
+
+
 module.exports = Util

@@ -90,7 +90,12 @@ router.post(
   utilities.checkAuthData, utilities.handleErrors(invController.deleteInventoryItem)
 )
 
+// * ****Costomer review of inventory**** *
+// final project
+router.post(
+  "/review", (invController.reviewItem) 
 
+)
 
 module.exports = router;
 

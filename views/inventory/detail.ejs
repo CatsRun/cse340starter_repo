@@ -8,3 +8,55 @@
     } %>
 
 <%- grid %>
+
+<!-- ************************** -->
+<!-- review form: final project -->
+<!-- ************************** -->
+<div class="form">
+  <h2>Reviews</h2>
+
+<!--  -->
+<p>existing review placeholder</p>
+  <%# pastReview %> <!-- make this the same way grid is done, ORDER By newest to oldest-->
+
+  <%# if (reviews) { %>
+    <!-- <h2>Welcome <%#= accountData.account_firstname.charAt(0) %></h2>
+  
+    <p>existing review placeholder within if</p> -->
+     <%#
+  } %>
+
+
+  <% if (locals.loggedin) { %>
+    <form action="/inv/review" method="post" id="reviewForm">
+      <fieldset>
+        <legend> Add a review </legend>
+      
+        <!-- screenName -->      
+      <p>User: <%= accountData.account_firstname.charAt(0) %><%= accountData.account_lastname %></p>
+      
+      <label for="review_text">What do you think of this car?</label>
+        <textarea name="review_text" id="review_text" placeholder="I love this car!" rows="4" required></textarea>
+
+        <input type="submit" name="submit" value="Add review">
+        
+        <input type="hidden" name="inv_id"
+            <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+            <% } %>> <!-- is tis pulling the inv_id? --> 
+            
+        <input type="hidden" name="account_id"
+            <% if(accountData.account_id) { %> value="<%= accountData.account_id %>"
+            <% } %>>
+      
+            
+      </fieldset>
+      
+      
+    </form>
+    
+
+
+  <% } else { %>
+    <p> You can add a review after you login here:   <a title="Click to log in" href="/account/login">Click to login</a>   </p>
+  <% } %>
+</div> 
