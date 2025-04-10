@@ -228,9 +228,100 @@ Util.checkJWTToken = (req, res, next) => {
  *      Populate Review Inventory Item
  *      final project
  * ************************************ */
-// Util.buildReview = async function(data) {
+ Util.buildReviewGrid = async function(data){
+  
+  let grid
+  
+  if(data.length > 0){
+    grid = '<ul id="detail-display">'
 
+    data.forEach(review => { 
+    const reviewDate = (review.review_date).toDateString()
+    // console.log(accountData.account_firstname + '30 accountData.account_firstname')
+    // const userName = account_id.account_firstname.charAt(0) + account_id.account_lastname
+      
+    console.log(new Date(review.review_date).toDateString() + " with date")
+      grid += '<li>'
+      grid += '<p>' +'<span>  '+ '• '+ 'userName' + ' </span>' +' wrote on: '  + '  ' + reviewDate + ' '+  review.review_text + '</p>'
+    })
+    grid += '</ul>'
+  } else { 
+    grid += '<p class="notice">Be the first to leave a review.</p>'
+  }
+  return grid
+}
+
+/* ****************************************
+ *      Populate Review Inventory by account_id
+ *      final project
+ * ************************************ */
+Util.buildAccountReviewGrid = async function(data){
+  
+  let grid
+  
+  if(data.length > 0){
+    grid = '<ul id="detail-display">'
+
+    data.forEach(review => { 
+    const reviewDate = (review.review_date).toDateString()
+    // console.log(accountData.account_firstname + '30 accountData.account_firstname')
+    // const userName = account_id.account_firstname.charAt(0) + account_id.account_lastname
+      
+    console.log(new Date(review.review_date).toDateString() + " with date")
+      grid += '<li>'
+      grid += '<p>' +'<span>  '+ '• '+ 'userName' + ' </span>' +'  ' + reviewDate + ' '+  review.review_text + '</p>' + ''
+      grid += `<td><a href='/inv/edit/${review.inv_id}' title='Click to update'>Modify</a></td>`; 
+      grid += `<td><a href='/inv/delete/${review.inv_id}' title='Click to delete'>Delete</a></td></tr>`;
+    })
+    grid += '</ul>'
+  } else { 
+    grid += '<p class="notice">Be the first to leave a review.</p>'
+  }
+  return grid
+}
+
+// dataTable += `<td><a href='/inv/edit/${element.inv_id}' title='Click to update'>Modify</a></td>`; 
+//      dataTable += `<td><a href='/inv/delete/${element.inv_id}' title='Click to delete'>Delete</a></td></tr>`;
+
+// ----------------------------------
+Util.buildAccountReviewGridTest = async function(data) { 
+
+  // if(data.length > 0){
+
+  const reviewDate = (review.review_date).toDateString()
+
+  let inventoryDisplay = document.getElementById("inventoryDisplay"); 
+  // Set up the table labels 
+  let dataTable = '<thead>'; 
+  dataTable += '<tr><th>userName</th><td>&nbsp;</td><td>&nbsp;</td></tr>'; 
+  dataTable += '</thead>'; 
+  // Set up the table body 
+  dataTable += '<tbody>'; 
+  // Iterate over all vehicles in the array and put each in a row 
+  data.forEach(function (element) { 
+  //  console.log(element.inv_id + ", " + element.inv_model + "inventory.js"); 
+   dataTable += `<tr><td>${element.inv_make} ${element.inv_model}</td>`; 
+   dataTable += `<td><a href='/inv/edit/${element.inv_id}' title='Click to update'>Modify</a></td>`; 
+   dataTable += `<td><a href='/inv/delete/${element.inv_id}' title='Click to delete'>Delete</a></td></tr>`; 
+  }) 
+  dataTable += '</tbody>'; 
+  // Display the contents in the Inventory Management view 
+  inventoryDisplay.innerHTML = dataTable; 
+
+// } else { 
+//   grid += '<p class="notice">Be the first to leave a review.</p>'
 // }
+// return grid
+ }
+
+
+
+
+
+
+
+
+
 
 
 module.exports = Util

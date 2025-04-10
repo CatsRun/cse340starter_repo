@@ -1,0 +1,39 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>    
+
+<%- messages() %>
+
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+
+<div class="form">
+  <form action="/review/edit" method="post" id="reviewEdit">  
+    <fieldset>
+
+    
+        <p>All feilds are required</p>
+        <label for="review_date">Review Date</label>
+        <input type="datetime-local" name="review_date" id="review_date" readonly
+        <% if (locals.review_date) { %> value="<%= locals.review_date %>"
+        <% } %>>
+        
+
+        <label for="review_text">Review Text</label>
+        <textarea name="review_text" id="review_text"></textarea>
+
+
+
+        <button type="submit" name="submit" >Update</button>
+
+        
+    </fieldset>
+  </form>
+</div>

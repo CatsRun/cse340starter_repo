@@ -7,16 +7,25 @@
       res.redirect('/')
     } %>
 
-<%- grid %>
+  <%- grid %>
 
 <!-- ************************** -->
 <!-- review form: final project -->
 <!-- ************************** -->
-<div class="form">
-  <h2>Reviews</h2>
+<div class="form" id="reviewDivForm">
+  <h2>Customer Reviews</h2>
 
 <!--  -->
-<p>existing review placeholder</p>
+<!-- <p>existing review placeholder</p> -->
+  <% if (review_item) { %>
+    <%- review_item %>
+  <%}else { %>
+    <p>Be the first to write a review </p>
+  <% } %>
+
+
+
+<%#- review_item %>
   <%# pastReview %> <!-- make this the same way grid is done, ORDER By newest to oldest-->
 
   <%# if (reviews) { %>

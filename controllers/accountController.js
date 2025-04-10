@@ -5,6 +5,7 @@
 
 const utilities = require("../utilities/")
 const accountModel = require("../models/account-model")
+// const invModel = require("../models/inventory-model")
 const bcrypt = require("bcryptjs")
 
 // https://blainerobertson.github.io/340-js/views/login.html
@@ -50,10 +51,17 @@ async function buildRegister(req, res, next) {
 
 async function buildAccntManagement(req, res, next) {
   let nav = await utilities.getNav()
+  const { account_id } = res.locals.accountData
+  const review_data = await accountModel.getReviewByAccount_id(account_id)
+  const review_item = await utilities.buildAccountReviewGrid(review_data)
+
+
+
   res.render("account/account-management", {
     errors: null,
     title: "Account Management",
     nav,
+    review_item,
   })
 }
 

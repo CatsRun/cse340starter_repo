@@ -37,6 +37,7 @@ async function getInventoryByInventoryId(inventory_id) {
     WHERE inv_id = $1`,
     [inventory_id]
   )
+  console.log(data.rows + "data.rows inv get")
     return data.rows
   } catch (error) {
     console.error("getInventoryByInventoryId error " + error)
@@ -174,6 +175,7 @@ async function reviewItem(
   
   const review_date = new Date()
   try {
+    console.log(inv_id + " 11.5 inv_id")
     const sql =
 
       "INSERT INTO public.review ( review_text, review_date, inv_id, account_id ) VALUES ($1, $2, $3, $4 ) RETURNING *"
@@ -191,7 +193,32 @@ async function reviewItem(
 }
 
 
+/* *****************************
+* Gets reviews based on the review id
+* Use this to organize by inventory (vehicle)
+* Ordered by review_datedecending
+* final project
+* ***************************** */
+async function getReviewByInv_id (
+  inv_id
+) {
+  // console.log(inv_id +' 19.5 inv_id')
+  try {
+    const result = await pool.query(
+
+      `SELECT * FROM review WHERE inv_id = $1 ORDER BY review_date DESC;`,
+      [inv_id])
+
+      // console.log(result.rows +' 19.75 result')
+      return result.rows
+  } catch (error) {
+    console.error("model error: " + error)
+  }
+}
+
+
+
 
 
 // module.exports = {getClassifications}
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByInventoryId, addClassification, addInventory, updateInventory, deleteInventoryItem, reviewItem};
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByInventoryId, addClassification, addInventory, updateInventory, deleteInventoryItem, reviewItem, getReviewByInv_id};

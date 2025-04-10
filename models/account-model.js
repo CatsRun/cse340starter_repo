@@ -120,12 +120,31 @@ async function updateAccountPassword(
   }
 }
 
+/* *****************************
+* Gets reviews based on the account id
+* Use this to organize by user
+* final project
+* ***************************** */
+async function getReviewByAccount_id (
+  account_id
+) {
+  try {
+    const result = await pool.query(
+
+      `SELECT * FROM review WHERE account_id = $1 ORDER BY review_date DESC;`,
+      // "SELECT * FROM review WHERE account_id = $1 ORDER BY review_date DESC;",
+      [account_id])
+
+      return result.rows
+  } catch (error) {
+    console.error("model error: " + error)
+  }
+}
 
 
 
 
 
-
-  module.exports = {registerAccount, checkExistingEmail, getAccountByEmail, getAccountByAccountId, updateAccountData, updateAccountPassword}
+  module.exports = {registerAccount, checkExistingEmail, getAccountByEmail, getAccountByAccountId, updateAccountData, updateAccountPassword,getReviewByAccount_id}
 
   // module.exports = {registerAccount, checkExistingEmail}

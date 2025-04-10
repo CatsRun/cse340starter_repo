@@ -33,23 +33,34 @@ invCont.buildByClassificationId = async function (req, res, next) {
 // added final project review
 invCont.buildByInventoryId = async function (req, res, next) {
     const inventory_id = req.params.inventoryId
-    console.log("detail view invrentory_id: " + inventory_id)
+    const { account_id } = res.locals.accountData
+    // const account_id = (req.body.account_id)
+    console.log(account_id + ' 35 account_id.account_firstname ')
+    // console.log(accountData.account_firstname + '30 accountData.account_firstname')
+    // console.log(inventory_id +' 19 inventory_id')
+    // console.log("detail view invrentory_id: " + inventory_id)
+
     const data = await invModel.getInventoryByInventoryId(inventory_id)
     const grid = await utilities.buildDetailGrid(data)
-    // const reviewData = await invModel.reviewItem(data)
-    
+    const review_data = await invModel.getReviewByInv_id(inventory_id)
+    const review_item = await utilities.buildReviewGrid(review_data, account_id)
+
+    // console.log(grid +' 19.2 grid')
+    // console.log(review_data[0] +' 20 review_data')
+    // console.log(review_item +' 21 review_item')
+
     let nav = await utilities.getNav()
     let in_make = data[0].inv_make
     let in_model = data[0].inv_model
     let in_year = data[0].inv_year
     let inv_id = data[0].inv_id
-    let review_id = data[0].review_id
+
     res.render("./inventory/detail", {
       title: in_year +" " + in_make + " " + in_model,
       nav,
-      inv_id,
       grid,
-      // review_id,
+      inv_id,
+      review_item,
       errors: null,
     })
   }
@@ -376,7 +387,8 @@ invCont.deleteInventoryItem = async function (req, res, next)
 // *          final project
 // ******************************************
 invCont.reviewItem = async function (req, res, next)
-{console.log(" 1 does it go there?")
+{
+  // console.log(" 1 does it go there?")
   // const inventory_id = req.params.inventoryId
 
   // const { account_id } = res.locals.accountData //this pulls the account_id but not from the form
@@ -429,71 +441,55 @@ invCont.reviewItem = async function (req, res, next)
 
 
 // ----------------------------------------test above
-invCont.reviewItemTest = async function (req, res, next)
-{console.log(" 1 does it go there?")
-  // let nav = await utilities.getNav()
-  // const inv_id = (req.body.inv_id)
-  const account_id = (req.body.account_id)
-  const inventory_id = req.params.inventoryId
-  console.log(inventory_id + " 2 invController")
-  const review = await invModel.reviewItem(inventory_id)
-
-
-
-
-
-
-
+// invCont.reviewItemTest = async function (req, res, next)
+// {console.log(" 1 does it go there?")
+//   // let nav = await utilities.getNav()
+//   // const inv_id = (req.body.inv_id)
+//   const account_id = (req.body.account_id)
+//   const inventory_id = req.params.inventoryId
+//   console.log(inventory_id + " 2 invController")
+//   const review = await invModel.reviewItem(inventory_id)
   
-  // const data = await invModel.getInventoryByInventoryId(inventory_id)
-  // const grid = await utilities.buildDetailGrid(data)
-  // const reviewData = await invModel.reviewItem(data)
-  
-  let nav = await utilities.getNav()
-  // let in_make = inventory_id[0].inv_make
-  // let in_model = inventory_id[0].inv_model
-  // let in_year = inventory_id[0].inv_year
-  // let review_id = inventory_id[0].review_id
-  // let inv_id = inventory_id[0].inv_id
-// go to inventory-model to process sql
-// console.log(inv_id + " 5 invController")
-  if (review) {
-    req.flash("notice", `Thank you for your review.`)
-    // res.redirect("/inv/")
-    res.render("./inventory/detail", {
-      // title: in_year +" " + in_make + " " + in_model,
-      nav,
-      // grid,
-      // review_id,reviewData,
-      errors: null,
-    })
-  } else {   
-    req.flash("notice", "Sorry, your review failed.")
-    // res.redirect("/inv/detail" + inv_id)    //this uses .redirect instead of rebuilding the page with .render
-    res.redirect("/account/") 
-  }  
-}
+//   let nav = await utilities.getNav()
+// // console.log(inv_id + " 5 invController")
+
+//   if (review) {
+//     req.flash("notice", `Thank you for your review.`)
+//     // res.redirect("/inv/")
+//     res.render("./inventory/detail", {
+//       // title: in_year +" " + in_make + " " + in_model,
+//       nav,
+//       // grid,
+//       // review_id,reviewData,
+//       errors: null,
+//     })
+//   } else {   
+//     req.flash("notice", "Sorry, your review failed.")
+//     // res.redirect("/inv/detail" + inv_id)    //this uses .redirect instead of rebuilding the page with .render
+//     res.redirect("/account/") 
+//   }  
+// }
 
 // ------------------example
-invCont.buildByInventoryIdm = async function (req, res, next) {
-  const inventory_id = req.params.inventoryId
-  const data = await invModel.getInventoryByInventoryId(inventory_id)
-  const grid = await utilities.buildDetailGrid(data)
-  const reviewData = await invModel.reviewItem(data)
+// invCont.buildByInventoryIdm = async function (req, res, next) {
+//   const inventory_id = req.params.inventoryId
+//   const data = await invModel.getInventoryByInventoryId(inventory_id)
+//   const grid = await utilities.buildDetailGrid(data)
+//   const reviewData = await invModel.reviewItem(data)
   
-  let nav = await utilities.getNav()
-  let in_make = data[0].inv_make
-  let in_model = data[0].inv_model
-  let in_year = data[0].inv_year
-  let review_id = data[0].review_id
-  res.render("./inventory/detail", {
-    title: in_year +" " + in_make + " " + in_model,
-    nav,
-    grid,
-    review_id,
-    errors: null,
-  })
-}
+//   let nav = await utilities.getNav()
+//   let in_make = data[0].inv_make
+//   let in_model = data[0].inv_model
+//   let in_year = data[0].inv_year
+//   let review_id = data[0].review_id
+//   res.render("./inventory/detail", {
+//     title: in_year +" " + in_make + " " + in_model,
+//     nav,
+//     grid,
+//     review_id,
+//     errors: null,
+//   })
+// }
 
 
   module.exports = invCont

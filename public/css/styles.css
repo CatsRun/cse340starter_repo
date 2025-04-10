@@ -346,3 +346,9 @@ input:required:valid {
     padding: 10px;
   }
 }
+
+#reviewDivForm {
+  width: 90%;
+  /* max-width: 800px; */
+  /* background-color: #425a3e; */
+}
