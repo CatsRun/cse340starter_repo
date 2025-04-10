@@ -271,8 +271,8 @@ Util.buildAccountReviewGrid = async function(data){
     console.log(new Date(review.review_date).toDateString() + " with date")
       grid += '<li>'
       grid += '<p>' +'<span>  '+ '• '+ 'userName' + ' </span>' +'  ' + reviewDate + ' '+  review.review_text + '</p>' + ''
-      grid += `<td><a href='/inv/edit/${review.inv_id}' title='Click to update'>Modify</a></td>`; 
-      grid += `<td><a href='/account/review-edit/${review.account_id}' title='Click to delete'>Delete</a></td></tr>`;
+      // grid += `<td><a href='/inv/edit/${review.inv_id}' title='Click to update'>Modify</a></td>`; 
+      // grid += `<td><a href='/account/review-edit/${review.account_id}' title='Click to delete'>Delete</a></td></tr>`;
     })
     grid += '</ul>'
   } else { 
