@@ -25,10 +25,7 @@
       <p>  <a href="/inv/">Inventory Management</a>    </p>
   <%
   } %>
-
   
-
-
 <% if (errors) { %>
     <ul class="notice">
    <% errors.array().forEach(error => { %>
@@ -56,26 +53,8 @@
     %> <p>You have not made any reviews yet.</p>
   <% } %>
 
-<!-- this is the start of the loop list, see if it works. How do I reference the account _id for the account being updated?  -->
-<!-- <%# if (reviews) { %>
-  <ul class="oldReview">
- <%# reviews.array().forEach(review => { %>
-   <li><%#= review %></li>
-<%#  }) %>
- </ul>
-<%# } %> -->
+
 
 </div>
 
 
-<!-- ***************** -->
-  
-
-  <%# accountData.account_type %>
-<%# console.log(accountData.account_type) %>
-
-<!-- <script>
-  // console.log(accountData.account_firstname + " test 2 account data")
-  console.log(newAccountData.account_firstname + " test 2 new data ")
-
-</script> -->

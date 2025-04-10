@@ -216,4 +216,48 @@ validate.checkUpdateData = async (req, res, next) => {
   next()
 }
   
+
+
+
+
+
+// ------------------------------test
+validate.newReviewRules = () => {
+  return [
+    // review text is required and must be string
+    body("review_text")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage("Please provide a review message."), // on error this message is sent.
+
+  ]
+}
+
+  /* ******************************
+ * Check data and return errors or continue to registration
+ * ***************************** */
+validate.checkReviewData = async (req, res, next) => {
+    const { inv_make,  inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color } = req.body
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      // let classificationList = await utilities.buildClassificationList()
+      // let nav = await utilities.getNav()
+      // res.render("inventory/addinventory", {
+      //   // should this go to a different page?
+      //   errors,
+      //   title: "Add New Vehicle",
+      //   nav,
+      //   inv_make,  inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classificationList,
+      // })
+      req.flash("message notice", "Please add a review before submitting.")
+      return
+    }
+    next()
+  }
+
+
+
   module.exports = validate

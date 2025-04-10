@@ -93,7 +93,9 @@ router.post(
 // * ****Costomer review of inventory**** *
 // final project
 router.post(
-  "/review", (invController.reviewItem) 
+  "/review", regValidate.newReviewRules(), 
+  regValidate.checkReviewData,
+  utilities.handleErrors(invController.reviewItem) 
 
 )
 

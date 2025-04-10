@@ -2,6 +2,7 @@
 
 const invModel = require("../models/inventory-model")
 const utilities = require("../utilities/")
+const accntContr = require("./accountController")
 
 const invCont = {}
 
@@ -33,12 +34,8 @@ invCont.buildByClassificationId = async function (req, res, next) {
 // added final project review
 invCont.buildByInventoryId = async function (req, res, next) {
     const inventory_id = req.params.inventoryId
-    const { account_id } = res.locals.accountData
-    // const account_id = (req.body.account_id)
-    console.log(account_id + ' 35 account_id.account_firstname ')
-    // console.log(accountData.account_firstname + '30 accountData.account_firstname')
-    // console.log(inventory_id +' 19 inventory_id')
-    // console.log("detail view invrentory_id: " + inventory_id)
+    // const { account_id } = res.locals.accountData
+    const account_id = (req.body.account_id)
 
     const data = await invModel.getInventoryByInventoryId(inventory_id)
     const grid = await utilities.buildDetailGrid(data)
@@ -395,10 +392,10 @@ invCont.reviewItem = async function (req, res, next)
   
   const inv_id = (req.body.inv_id)
   // const data = await invModel.getInventoryByInventoryId(inv_id)
-  console.log(inv_id + " 7 inv_id")
+  // console.log(inv_id + " 7 inv_id")
   const account_id = (req.body.account_id)
 
-  console.log(account_id + " 11 account_id")
+  // console.log(account_id + " 11 account_id")
 
   let nav = await utilities.getNav()
     const review_text  = (req.body.review_text)
@@ -409,7 +406,7 @@ invCont.reviewItem = async function (req, res, next)
       inv_id, 
       account_id
     )
-    console.log(inv_id + " 12 inv_id")
+    // console.log(inv_id + " 12 inv_id")
     if (review) {
       req.flash("notice", `Thank you for your review.`)
       // res.redirect("/inv/")

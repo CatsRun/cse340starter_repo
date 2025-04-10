@@ -234,6 +234,7 @@ Util.checkJWTToken = (req, res, next) => {
   
   if(data.length > 0){
     grid = '<ul id="detail-display">'
+    
 
     data.forEach(review => { 
     const reviewDate = (review.review_date).toDateString()
@@ -271,7 +272,7 @@ Util.buildAccountReviewGrid = async function(data){
       grid += '<li>'
       grid += '<p>' +'<span>  '+ '• '+ 'userName' + ' </span>' +'  ' + reviewDate + ' '+  review.review_text + '</p>' + ''
       grid += `<td><a href='/inv/edit/${review.inv_id}' title='Click to update'>Modify</a></td>`; 
-      grid += `<td><a href='/inv/delete/${review.inv_id}' title='Click to delete'>Delete</a></td></tr>`;
+      grid += `<td><a href='/account/review-edit/${review.account_id}' title='Click to delete'>Delete</a></td></tr>`;
     })
     grid += '</ul>'
   } else { 
@@ -283,7 +284,7 @@ Util.buildAccountReviewGrid = async function(data){
 // dataTable += `<td><a href='/inv/edit/${element.inv_id}' title='Click to update'>Modify</a></td>`; 
 //      dataTable += `<td><a href='/inv/delete/${element.inv_id}' title='Click to delete'>Delete</a></td></tr>`;
 
-// ----------------------------------
+// ----------------------------------TESTING-----------------
 Util.buildAccountReviewGridTest = async function(data) { 
 
   // if(data.length > 0){

@@ -47,6 +47,7 @@ async function buildRegister(req, res, next) {
 
 /* ****************************************
 *  Deliver account management view
+*  edited for final project
 * *************************************** */
 
 async function buildAccntManagement(req, res, next) {
